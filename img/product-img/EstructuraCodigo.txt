@@ -1,0 +1,15 @@
+Marca dos caracteres - Tipo de reloj - Numero de reloj - Posicion de su album - Tamaño
+
+Tipo de reloj
+A - analogico
+D - digital
+S - smartwatch
+
+Numero de reloj
+Posicion de reloj, como estan acomodados, empieza desde el 1
+
+Tamaño
+S - pequeño
+B - grande
+
+CS-A-5-1-S.jpg
