@@ -43,9 +43,9 @@ INSERT INTO tipoPublico(nombre) VALUES('Hombres');
 INSERT INTO tipoPublico(nombre) VALUES('Mujeres');
 INSERT INTO tipoPublico(nombre) VALUES('Niños');
 
-INSERT INTO productos(nombre, precio, modelo, idColor, descripcion, caracteristicas, idTipoPublico, nombreImagen, cantImagenes) VALUES('',0.00,'',0,'','',0,'',0);
+INSERT INTO productos(nombre, precio, idMarca, modelo, idColor, descripcion, caracteristicas, idTipoPublico, nombreImagen, cantImagenes) VALUES('',0.00, 0, '',0,'','',0,'',0);
 
-INSERT INTO productos(nombre, precio, modelo, idColor, descripcion, caracteristicas, idTipoPublico, nombreImagen, cantImagenes) VALUES('Reloj Casio MTP-1183A-2A-Plateado',769.00,'MTP-1183A-2A',2,NULL,'Análogo;Movimiento de Cuarzo;Ventana fechadora;Pila durable hasta 7 años;Resistencia al agua de 30M;Diseño original hace más de 20 años',1,'CS-A-5',3);
+INSERT INTO productos(nombre, precio, idMarca, modelo, idColor, descripcion, caracteristicas, idTipoPublico, nombreImagen, cantImagenes) VALUES('Reloj Casio MTP-1183A-2A-Plateado',769.00, 1, 'MTP-1183A-2A',2,NULL,'Análogo;Movimiento de Cuarzo;Ventana fechadora;Pila durable hasta 7 años;Resistencia al agua de 30M;Diseño original hace más de 20 años',1,'CS-A-5',3);
 
 CREATE TABLE marcas(
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
