@@ -1,4 +1,4 @@
-Marca dos caracteres - Tipo de reloj - Numero de reloj - Posicion de su album - Tamaño
+Marca dos caracteres - Tipo de reloj - Numero de reloj - Posicion en su carpeta - Tamaño
 
 Tipo de reloj
 A - analogico
@@ -8,8 +8,12 @@ S - smartwatch
 Numero de reloj
 Posicion de reloj, como estan acomodados, empieza desde el 1
 
+Posicion en su carpeta
+Empieza desde el 1
+
 Tamaño
 S - pequeño
 B - grande
 
+Ejemplo-------------------------------------
 CS-A-5-1-S.jpg
