@@ -1,4 +1,6 @@
 <?php
+    session_name('chronox');
+    session_start();
     include('conexion.php');
 
     $err = 0;
@@ -103,6 +105,34 @@
 
                     $salida['err'] = $err;
                     echo json_encode($salida);
+                }
+
+                if($err == 0) {
+                    $salida['err'] = $err;
+                    $salida['res'] = $row;
+
+                    echo json_encode($salida);
+                }
+
+                $stmt->close();
+                $link->close();
+                break;
+            case 'crearUsuarioTemp':
+                $nombreUsuario = $_GET['usuario'];
+
+                $_SESSION['IdUsuario'] = -1;
+
+                $stmt = $link->prepare('CALL p_crearUsuarioTemp(?)');
+                $stmt->bind_param('s',$nombreUsuario);
+
+                if(!$stmt->execute()) {
+                    $err = 1;
+
+                    $salida['err'] = $err;
+                    echo json_encode($salida);
+                } else {
+                    $row = mysqli_fetch_array($stmt->get_result(), MYSQLI_ASSOC);
+                    $_SESSION['IdUsuario'] = $row['id'];
                 }
 
                 if($err == 0) {

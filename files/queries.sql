@@ -81,3 +81,25 @@ CREATE PROCEDURE p_cantProductosXMarca(
     p_idMarca INT
 )
 SELECT COUNT(*) as cantProductos FROM productos WHERE idMarca = p_idMarca;
+
+CREATE TABLE usuarios(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nombreUsuario VARCHAR(128) NOT NULL,
+    clave VARCHAR(64),
+    esTemp SMALLINT
+);
+
+ALTER TABLE usuarios
+    ADD idCarrito INT;
+
+CREATE PROCEDURE p_crearUsuarioTemp(
+    p_nombreUsuario VARCHAR(128)
+)
+INSERT INTO usuarios(nombreUsuario, esTemp) VALUES(p_nombreUsuario, 1);
+SELECT id FROM usuarios ORDER BY id DESC LIMIT 1;
+
+CREATE TABLE carrito(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    total DECIMAL(10,2),
+    pagado SMALLINT
+);

@@ -1,3 +1,8 @@
+<?php
+    session_name('chronox');
+    session_start();
+    date_default_timezone_set('America/Monterrey');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -320,7 +325,7 @@
                         <div class="single-product-wrapper">
                             <!-- Product Image -->
                             <div class="product-img">
-                                <img src="img/product-img/RX-A-8-1-B.jpg" alt="">
+                                <img src="img/product-img/RO-A-8-1-B.jpg" alt="">
                                 <!-- Favourite -->
                                 <div class="product-favourite">
                                     <a href="#" class="favme fa fa-heart"></a>
@@ -348,7 +353,7 @@
                         <div class="single-product-wrapper">
                             <!-- Product Image -->
                             <div class="product-img">
-                                <img src="img/product-img/SK-A-4-1-B.jpg" alt="">
+                                <img src="img/product-img/SE-A-4-1-B.jpg" alt="">
 
                                 <!-- Product Badge -->
                                 <!--<div class="product-badge offer-badge">
@@ -540,6 +545,11 @@
     <script src="js/classy-nav.min.js"></script>
     <!-- Active js -->
     <script src="js/active.js"></script>
+    <script src="js/datos.js"></script>
+
+    <script>
+        crearUsuarioTemp('<?php if(isset($_SESSION['IdUsuario'])) { echo "true"; } else { echo "false"; } ?>');
+    </script>
 
 </body>
 

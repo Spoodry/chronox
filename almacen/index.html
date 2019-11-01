@@ -16,26 +16,26 @@
 
     <div class="container">
         <div class="form-group">
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" id="txtCadena">
         </div>
         <div class="form-group d-flex justify-content-around">
             <div>
-                <input type="radio" name="rdTipo" id="rdInicio" checked>
+                <input type="radio" name="rdTipo" id="rdInicio" value="Principio" checked>
                 <label class="font-weight-normal h5" for="rdInicio">Principio</label>
             </div>
             <div>
-                <input type="radio" name="rdTipo" id="rdMedio">
+                <input type="radio" name="rdTipo" id="rdMedio" value="Medio">
                 <label class="font-weight-normal h5" for="rdMedio">Medio</label>
             </div>
             <div>
-                <input type="radio" name="rdTipo" id="rdFin">
+                <input type="radio" name="rdTipo" id="rdFin" value="Final">
                 <label class="font-weight-normal h5" for="rdFin">Final</label>
             </div>
         </div>
         <div class="form-group text-center">
-            <input type="submit" class="btn bg-success text-white">
+            <input type="submit" class="btn bg-success text-white" onclick="buscar()">
         </div>
-        <div class="table-responsive">
+        <div class="table-responsive d-none" id="tablaCompleta">
             <table class="table" style="visibility: visible;">
                 <thead>
                     <tr>
@@ -47,6 +47,11 @@
                         <th>Economico</th>
                     </tr>
                 </thead>
+                <tbody id="tableContenido">
+                    <tr>
+                        <td>Marca</td>
+                    </tr>
+                </tbody>
             </table>
         </div>
     </div>
@@ -61,5 +66,7 @@
     <script src="../js/plugins.js"></script>
     <!-- Classy Nav js -->
     <script src="../js/classy-nav.min.js"></script>
+
+    <script src="funciones.js"></script>
 </body>
 </html>
