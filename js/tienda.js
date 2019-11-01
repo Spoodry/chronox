@@ -3,32 +3,37 @@ $(".porMarca").click(function() {
     obtenerProductosXMarca(idMarca);
 });
 
-function obtenerProductos() {
-    $.ajax({
-        data: "opc=obtenerProductos",
-        type: "GET",
-        dataType: "json",
-        url: "files/procesar.php",
-        success: function(data) {
-            if(data.err == 1) {
-                alert("error");
-            } else {
-                console.log(data.res);
-                $("#datosProductos").empty();
+function obtenerProductos(tipo, opcion) {
+    if(tipo == "todo") {
+        $.ajax({
+            data: "opc=obtenerProductos",
+            type: "GET",
+            dataType: "json",
+            url: "files/procesar.php",
+            success: function(data) {
+                if(data.err == 1) {
+                    alert("error");
+                } else {
+                    console.log(data.res);
+                    $("#datosProductos").empty();
+                    $("#tiendaTitulo").html("relojes");
 
-                var informacion = "";
+                    var informacion = "";
 
-                $.each(data.res, function(index, array) {
-                    informacion += crearInfoProducto(array);    
-                });
+                    $.each(data.res, function(index, array) {
+                        informacion += crearInfoProducto(array);    
+                    });
 
-                $("#datosProductos").append(informacion);
+                    $("#datosProductos").append(informacion);
 
-                obtenerCantProductos();
+                    obtenerCantProductos();
 
+                }
             }
-        }
-    });
+        });
+    } else if(tipo == "marca") {
+        obtenerProductosXMarca(opcion);
+    }
 }
 
 function obtenerProductosXMarca(idMarca) {
@@ -45,11 +50,14 @@ function obtenerProductosXMarca(idMarca) {
                 $("#datosProductos").empty();
 
                 var informacion = "";
+                var marca = "";
 
                 $.each(data.res, function(index, array) {
                     informacion += crearInfoProducto(array);    
+                    marca = array['marca'];
                 });
 
+                $("#tiendaTitulo").html(marca);
                 $("#datosProductos").append(informacion);
 
                 obtenerCantProductosXMarca(idMarca);
