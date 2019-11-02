@@ -34,6 +34,10 @@ function obtenerProductos(tipo, opcion) {
 
                     obtenerCantProductos();
 
+                    $(".add-to-carrito").click(function() {
+                        addToCarrito(this);
+                    });
+
                 }
             }
         });
@@ -72,7 +76,7 @@ function obtenerProductosXMarca(idMarca) {
                 obtenerCantProductosXMarca(idMarca);
 
                 $(".add-to-carrito").click(function() {
-                    console.log("Añadido al carrito :3");
+                    addToCarrito(this);
                 });
 
             }
@@ -106,6 +110,10 @@ function obtenerProductosXTipoPublico(idTipoPublico) {
 
                 obtenerCantProductosXTipoPublico(idTipoPublico);
 
+                $(".add-to-carrito").click(function() {
+                    addToCarrito(this);
+                });
+
             }
         }
     });
@@ -118,7 +126,7 @@ function crearInfoProducto(array) {
     var extensionImagen="jpg";
     if(array['marca'] == "Huawei" || array['marca'] == "Omega")
         extensionImagen="png";
-    informacion += "<div class=\"product-img\"><img src=\"img/product-img/" + array['nombreImagen'] + "-1-B." + extensionImagen + "\" alt=\"\">";
+    informacion += "<div class=\"product-img\"><img class=\"\" src=\"img/product-img/" + array['nombreImagen'] + "-1-B." + extensionImagen + "\" alt=\"\">";
     if(array['cantImagenes'] > 1)
         informacion += "<img class=\"hover-img\" src=\"img/product-img/" + array['nombreImagen'] + "-2-B." + extensionImagen + "\" alt=\"\">";
     informacion += "<div class=\"product-favourite\">";

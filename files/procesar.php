@@ -201,6 +201,32 @@
                 $stmt->close();
                 $link->close();
                 break;
+            case 'addToCarrito':
+                $idProducto = $_GET['idProducto'];
+                $idUsuario = $_GET['idUsuario'];
+
+                $stmt = $link->prepare('CALL p_agregarACarrito(?,?)');
+                $stmt->bind_param('ii', $idProducto, $idUsuario);
+
+                if($stmt->execute()) {
+                    $row = mysqli_fetch_array($stmt->get_result(), MYSQLI_ASSOC);
+                } else {
+                    $err = 1;
+
+                    $salida['err'] = $err;
+                    echo json_encode($salida);
+                }
+
+                if($err == 0) {
+                    $salida['err'] = $err;
+                    $salida['res'] = $row;
+
+                    echo json_encode($salida);
+                }
+
+                $stmt->close();
+                $link->close();
+                break;
             default:
                 # code...
                 break;
