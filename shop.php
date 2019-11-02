@@ -1,4 +1,7 @@
 <?php
+    session_name('chronox');
+    session_start();
+    date_default_timezone_set('America/Monterrey');
     if(isset($_GET['tipo'])) { $tipo = $_GET['tipo']; } else { $tipo = "todo"; }
     if(isset($_GET['opc'])) { $opcion = $_GET['opc']; } else { $opcion = ""; }
 ?>
@@ -74,6 +77,10 @@
                                             <li><a class="porMarca" href="#" value="1">Casio</a></li>
                                             <li><a class="porMarca" href="#" value="2">Rolex</a></li>
                                             <li><a class="porMarca" href="#" value="3">Seiko</a></li>
+                                            <li><a class="porMarca" href="#" value="4">Omega</a></li>
+                                            <li><a class="porMarca" href="#" value="5">Swatch</a></li>
+                                            <li><a class="porMarca" href="#" value="6">Soxy</a></li>
+                                            <li><a class="porMarca" href="#" value="7">Huawei</a></li>
                                         </ul>
                                     </li>
                                     <!-- Single Item -->
@@ -91,9 +98,9 @@
                                         <a href="#">público</a>
                                         <ul class="sub-menu collapse" id="accessories">
                                             <li><a href="#">Todos</a></li>
-                                            <li><a href="#">Hombres</a></li>
-                                            <li><a href="#">Mujeres</a></li>
-                                            <li><a href="#">Niños</a></li>
+                                            <li><a class="porTipoPublico" href="#" value="1">Hombres</a></li>
+                                            <li><a class="porTipoPublico" href="#" value="2">Mujeres</a></li>
+                                            <li><a class="porTipoPublico" href="#" value="3">Niños</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -284,6 +291,8 @@
     <script src="js/active.js"></script>
 
     <script src="js/tienda.js"></script>
+
+    <script src="js/carrito.js"></script>
 
     <script>
         obtenerProductos("<?php echo $tipo; ?>", <?php echo $opcion; ?>);

@@ -82,6 +82,16 @@ CREATE PROCEDURE p_cantProductosXMarca(
 )
 SELECT COUNT(*) as cantProductos FROM productos WHERE idMarca = p_idMarca;
 
+CREATE PROCEDURE p_obtenerProductosXTipoPublico(
+    p_idTipoPublic INT    
+)
+SELECT p.id, p.nombre as producto, m.nombre as marca, tp.nombre as tipoPublico, p.precio, p.nombreImagen, p.cantImagenes , p.idTipoPublico FROM productos as p inner join tipoPublico as tp ON p.idTipoPublico = tp.id inner join marcas as m ON m.id = p.idMarca WHERE p.idTipoPublico = p_idTipoPublic;
+
+CREATE PROCEDURE p_cantProductosXTipoPublico(
+    p_idTipoPublic INT
+)
+SELECT COUNT(*) as cantProductos FROM productos WHERE idTipoPublico = p_idTipoPublic;
+
 CREATE TABLE usuarios(
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nombreUsuario VARCHAR(128) NOT NULL,
@@ -92,10 +102,16 @@ CREATE TABLE usuarios(
 ALTER TABLE usuarios
     ADD idCarrito INT;
 
+ALTER TABLE usuarios
+ADD CONSTRAINT idCarrito_FK FOREIGN KEY(idCarrito) REFERENCES carrito(id);
+
 CREATE PROCEDURE p_crearUsuarioTemp(
     p_nombreUsuario VARCHAR(128)
 )
-INSERT INTO usuarios(nombreUsuario, esTemp) VALUES(p_nombreUsuario, 1);
+INSERT INTO carrito(total, pagado) VALUES(0.00, 0);
+DECLARE @p_idCarrito INT;
+SET @p_idCarrito = (SELECT id FROM carrito ORDER BY id DESC LIMIT 1);
+INSERT INTO usuarios(nombreUsuario, esTemp, idCarrito) VALUES(p_nombreUsuario, 1, @p_idCarrito);
 SELECT id FROM usuarios ORDER BY id DESC LIMIT 1;
 
 CREATE TABLE carrito(
@@ -103,3 +119,21 @@ CREATE TABLE carrito(
     total DECIMAL(10,2),
     pagado SMALLINT
 );
+
+CREATE TABLE productosEnCarrito(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    idProducto INT NOT NULL,
+    idCarrito INT NOT NULL,
+    CONSTRAINT idProducto_FK FOREIGN KEY(idProducto) REFERENCES productos(id),
+    CONSTRAINT idCarrito_FK FOREIGN KEY(idCarrito) REFERENCES carrito(id)
+);
+
+CREATE PROCEDURE p_agregarACarrito(
+    p_idProducto INT,
+    p_idUsuario INT
+)
+BEGIN
+    SET @p_idCarrito = (SELECT idCarrito FROM usuarios WHERE id = p_idUsuario);
+    INSERT INTO productosEnCarrito(idProducto, idCarrito) VALUES(p_idProducto, @p_idCarrito);
+    SELECT id FROM productosEnCarrito ORDER BY id DESC LIMIT 1;
+END;

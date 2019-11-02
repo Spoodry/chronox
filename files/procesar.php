@@ -15,11 +15,11 @@
 
                 if($stmt->execute()) {
                     $rows = mysqli_fetch_all($stmt->get_result(), MYSQLI_ASSOC);
-
-                    foreach($rows as $row) {
-                        $row['producto'] = utf8_encode($row['producto']);
-                        $row['marca'] = utf8_encode($row['marca']);
-                        $row['nombreImagen'] = utf8_encode($row['nombreImagen']);
+                    
+                    for($i = 0; $i < count($rows); $i++) {
+                        $rows[$i]['producto'] = utf8_encode($rows[$i]['producto']);
+                        $rows[$i]['marca'] = utf8_encode($rows[$i]['marca']);
+                        $rows[$i]['nombreImagen'] = utf8_encode($rows[$i]['nombreImagen']);
                     }
                 } else {
                     $err = 1;
@@ -70,10 +70,42 @@
                 if($stmt->execute()) {
                     $rows = mysqli_fetch_all($stmt->get_result(), MYSQLI_ASSOC);
 
-                    foreach($rows as $row) {
-                        $row['producto'] = utf8_encode($row['producto']);
-                        $row['marca'] = utf8_encode($row['marca']);
-                        $row['nombreImagen'] = utf8_encode($row['nombreImagen']);
+                    for($i = 0; $i < count($rows); $i++) {
+                        $rows[$i]['producto'] = utf8_encode($rows[$i]['producto']);
+                        $rows[$i]['marca'] = utf8_encode($rows[$i]['marca']);
+                        $rows[$i]['nombreImagen'] = utf8_encode($rows[$i]['nombreImagen']);
+                    }
+                } else {
+                    $err = 1;
+                    
+                    $salida['err'] = $err;
+                    echo json_encode($salida);
+                }
+
+                if($err == 0) {
+                    $salida['err'] = $err;
+                    $salida['res'] = $rows;
+
+                    echo json_encode($salida);
+                }
+
+                $stmt->close();
+                $link->close();
+                break;
+            case 'obtenerProductosXTipoPublico':
+                $idTipoPublico = $_GET['idTipoPublico'];
+
+                $stmt = $link->prepare('CALL p_obtenerProductosXTipoPublico(?)');
+                $stmt->bind_param("i", $idTipoPublico);
+
+                if($stmt->execute()) {
+                    $rows = mysqli_fetch_all($stmt->get_result(), MYSQLI_ASSOC);
+                    
+                    for($i = 0; $i < count($rows); $i++) {
+                        $rows[$i]['producto'] = utf8_encode($rows[$i]['producto']);
+                        $rows[$i]['marca'] = utf8_encode($rows[$i]['marca']);
+                        $rows[$i]['tipoPublico'] = utf8_encode($rows[$i]['tipoPublico']);
+                        $rows[$i]['nombreImagen'] = utf8_encode($rows[$i]['nombreImagen']);
                     }
                 } else {
                     $err = 1;
@@ -97,6 +129,30 @@
 
                 $stmt = $link->prepare('CALL p_cantProductosXMarca(?)');
                 $stmt->bind_param('i', $idMarca);
+
+                if($stmt->execute()) {
+                    $row = mysqli_fetch_array($stmt->get_result(), MYSQLI_ASSOC);
+                } else {
+                    $err = 1;
+
+                    $salida['err'] = $err;
+                    echo json_encode($salida);
+                }
+
+                if($err == 0) {
+                    $salida['err'] = $err;
+                    $salida['res'] = $row;
+
+                    echo json_encode($salida);
+                }
+
+                $stmt->close();
+                $link->close();
+                break;
+            case 'cantProductosXTipoPublico':
+                $idTipoPublico = $_GET['idTipoPublico'];
+                $stmt = $link->prepare('CALL p_cantProductosXTipoPublico(?)');
+                $stmt->bind_param('i', $idTipoPublico);
 
                 if($stmt->execute()) {
                     $row = mysqli_fetch_array($stmt->get_result(), MYSQLI_ASSOC);

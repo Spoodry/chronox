@@ -24,24 +24,22 @@
                                     <li><a href="shop.php?tipo=marca&opc=1">Casio</a></li>
                                     <li><a href="shop.php?tipo=marca&opc=2">Rolex</a></li>
                                     <li><a href="shop.php?tipo=marca&opc=3">Seiko</a></li>
-                                    <li><a href="shop.html">Rompers</a></li>
-                                    <li><a href="shop.html">Bras &amp; Panties</a></li>
+                                    <li><a href="shop.php?tipo=marca&opc=4">Omega</a></li>
+                                    <li><a href="shop.php?tipo=marca&opc=5">Swatch</a></li>
+                                    <li><a href="shop.php?tipo=marca&opc=6">Soxy</a></li>
+                                    <li><a href="shop.php?tipo=marca&opc=7">Huawei</a></li>
                                 </ul>
                                 <ul class="single-mega cn-col-4">
                                     <li class="title">Tipos</li>
-                                    <li><a href="shop.html">T-Shirts</a></li>
-                                    <li><a href="shop.html">Polo</a></li>
-                                    <li><a href="shop.html">Shirts</a></li>
-                                    <li><a href="shop.html">Jackets</a></li>
-                                    <li><a href="shop.html">Trench</a></li>
+                                    <li><a href="#">Analógico</a></li>
+                                    <li><a href="#">Digital</a></li>
+                                    <li><a href="#">Smartwatch</a></li>
                                 </ul>
                                 <ul class="single-mega cn-col-4">
-                                    <li class="title">Kid's Collection</li>
-                                    <li><a href="shop.html">Dresses</a></li>
-                                    <li><a href="shop.html">Shirts</a></li>
-                                    <li><a href="shop.html">T-shirts</a></li>
-                                    <li><a href="shop.html">Jackets</a></li>
-                                    <li><a href="shop.html">Trench</a></li>
+                                    <li class="title">Público</li>
+                                    <li><a href="shop.php?tipo=tipoPublico&opc=1">Hombres</a></li>
+                                    <li><a href="shop.php?tipo=tipoPublico&opc=2">Mujeres</a></li>
+                                    <li><a href="shop.php?tipo=tipoPublico&opc=3">Niños</a></li>
                                 </ul>
                                 <div class="single-mega cn-col-4">
                                     <img src="img/bg-img/bg-6.jpg" alt="">
@@ -83,7 +81,7 @@
             </div>
             <!-- User Login Info -->
             <div class="user-login-info">
-                <a href="#"><img src="img/core-img/user.svg" alt=""></a>
+                <a href="#"><img src="img/core-img/user.svg" alt=""><span><?php if(isset($_SESSION['IdUsuario'])) { echo $_SESSION['IdUsuario']; } else { echo '0'; } ?></span></a>
             </div>
             <!-- Cart Area -->
             <div class="cart-area">
