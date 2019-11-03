@@ -137,3 +137,18 @@ BEGIN
     INSERT INTO productosEnCarrito(idProducto, idCarrito) VALUES(p_idProducto, @p_idCarrito);
     SELECT id FROM productosEnCarrito ORDER BY id DESC LIMIT 1;
 END;
+
+CREATE PROCEDURE p_obtenerProductosEnCarrito(
+    p_idCarrito INT    
+)
+SELECT pc.id, p.id as idProducto, p.nombre, m.nombre as marca, c.nombre as color, p.nombreImagen FROM productosEnCarrito as pc inner join productos as p on pc.idProducto = p.id inner join marcas as m on p.idMarca = m.id inner join colores as c on p.idColor = c.id WHERE idCarrito = p_idCarrito;
+
+CREATE PROCEDURE p_obtenerIdCarrito(
+    p_idUsuario INT
+)
+SELECT idCarrito FROM usuarios WHERE id = p_idUsuario;
+
+CREATE PROCEDURE p_cantProductosCarrito(
+    p_idCarrito INT
+)
+SELECT COUNT(*) FROM productosEnCarrito WHERE idCarrito = p_idCarrito;

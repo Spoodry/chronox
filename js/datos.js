@@ -17,3 +17,20 @@ function crearUsuarioTemp(hayUsuario) {
         });
     }
 }
+
+function obtenerIdCarrito() {
+    $.ajax({
+        data: "opc=obtenerIdCarrito&idUsuario=" + sessIdUsuario,
+        type: "GET",
+        dataType: "json",
+        url: "files/procesar.php",
+        success: function(data) {
+            if(data.err == 1) {
+                alert("error");
+            } else {
+                idCarrito = data.res['idCarrito'];
+                actualizarCarrito();
+            }
+        }
+    });
+}

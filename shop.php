@@ -221,9 +221,13 @@
 
     <script src="js/carrito.js"></script>
 
+    <script src="js/datos.js"></script>
+
     <script>
         obtenerProductos("<?php echo $tipo; ?>", <?php echo $opcion; ?>);
         var sessIdUsuario = <?php if(isset($_SESSION['IdUsuario'])) { echo $_SESSION['IdUsuario']; } else { echo -1; } ?>;
+        var idCarrito;
+        obtenerIdCarrito();
     </script>
 
 </body>

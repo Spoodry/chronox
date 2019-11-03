@@ -306,10 +306,13 @@
     <!-- Active js -->
     <script src="js/active.js"></script>
     <script src="js/datos.js"></script>
+    <script src="js/carrito.js"></script>
 
     <script>
         crearUsuarioTemp('<?php if(isset($_SESSION['IdUsuario'])) { echo "true"; } else { echo "false"; } ?>');
         var sessIdUsuario = <?php if(isset($_SESSION['IdUsuario'])) { echo $_SESSION['IdUsuario']; } else { echo -1; } ?>;
+        var idCarrito;
+        obtenerIdCarrito();
     </script>
 
 </body>

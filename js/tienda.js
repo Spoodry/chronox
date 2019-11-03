@@ -133,7 +133,7 @@ function crearInfoProducto(array) {
     informacion += "<a href=\"#\" class=\"favme fa fa-heart\"></a></div></div><div class=\"product-description\">";
     informacion += "<span>" + array['marca'] + "</span><a href=\"single-product-details.html\">";
     informacion += "<h6>" + array['producto'] + "</h6></a><p class=\"product-price\">";
-    informacion += "$" + array['precio'] + "</p><div class=\"hover-content\">";
+    informacion += "$" + array['precio'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</p><div class=\"hover-content\">";
     informacion += "<div class=\"add-to-cart-btn\"><a class=\"btn essence-btn add-to-carrito\" value=\"" + array['id'] + "\" style=\"color: white;\">añadir al carrito</a>";
     informacion += "</div></div></div></div></div>";
 
