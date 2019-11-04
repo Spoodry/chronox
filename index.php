@@ -148,7 +148,7 @@
                                 <div class="hover-content">
                                     <!-- Add to Cart -->
                                     <div class="add-to-cart-btn">
-                                        <a href="#" class="btn essence-btn">añadir al carrito</a>
+                                        <a href="#" class="btn essence-btn add-carrito-index" value="26">añadir al carrito</a>
                                     </div>
                                 </div>
                             </div>
@@ -170,13 +170,13 @@
                                 <a href="single-product-details.html">
                                     <h6>Rolex Lady-DateJust</h6>
                                 </a>
-                                <p class="product-price">$736,329.00 MX</p>
+                                <p class="product-price">$737,661.44 MX</p>
 
                                 <!-- Hover Content -->
                                 <div class="hover-content">
                                     <!-- Add to Cart -->
                                     <div class="add-to-cart-btn">
-                                        <a href="#" class="btn essence-btn">añadir al carrito</a>
+                                        <a href="#" class="btn essence-btn add-carrito-index" value="46">añadir al carrito</a>
                                     </div>
                                 </div>
                             </div>
@@ -210,7 +210,7 @@
                                 <div class="hover-content">
                                     <!-- Add to Cart -->
                                     <div class="add-to-cart-btn">
-                                        <a href="#" class="btn essence-btn">añadir al carrito</a>
+                                        <a href="#" class="btn essence-btn add-carrito-index" value="22">añadir al carrito</a>
                                     </div>
                                 </div>
                             </div>
@@ -246,7 +246,7 @@
                                 <div class="hover-content">
                                     <!-- Add to Cart -->
                                     <div class="add-to-cart-btn">
-                                        <a href="#" class="btn essence-btn">añadir al carrito</a>
+                                        <a href="#" class="btn essence-btn add-carrito-index" value="23">añadir al carrito</a>
                                     </div>
                                 </div>
                             </div>

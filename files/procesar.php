@@ -236,11 +236,21 @@
                 if($stmt->execute()) {
                     $rows = mysqli_fetch_all($stmt->get_result(), MYSQLI_ASSOC);
 
+                    $subtotal = 0.00;
                     for($i = 0; $i < count($rows); $i++) {
                         $rows[$i]['nombre'] = utf8_encode($rows[$i]['nombre']);
                         $rows[$i]['marca'] = utf8_encode($rows[$i]['marca']);
                         $rows[$i]['color'] = utf8_encode($rows[$i]['color']);
+
+                        $subtotal += $rows[$i]['precio'];
                     }
+                    
+                    $stmt->close();
+
+                    $stmt = $link->prepare('CALL p_actualizarTotalCarrito(?,?)');
+                    $stmt->bind_param('ii', $subtotal, $idCarrito);
+
+                    $stmt->execute();
                 } else {
                     $err = 1;
 
@@ -288,6 +298,81 @@
 
                 $stmt = $link->prepare('CALL p_cantProductosCarrito(?)');
                 $stmt->bind_param('i',$idCarrito);
+
+                if($stmt->execute()) {
+                    $row = mysqli_fetch_array($stmt->get_result(), MYSQLI_ASSOC);
+                } else {
+                    $err = 1;
+
+                    $salida['err'] = $err;
+                    echo json_encode($salida);
+                }
+
+                if($err == 0) {
+                    $salida['err'] = $err;
+                    $salida['res'] = $row;
+
+                    echo json_encode($salida);
+                }
+
+                $stmt->close();
+                $link->close();
+                break;
+            case 'eliminarDelCarrito':
+                $idProductoCarrito = $_GET['idProductoCarrito'];
+
+                $stmt = $link->prepare('CALL p_eliminarDelCarrito(?)');
+                $stmt->bind_param('i', $idProductoCarrito);
+
+                if(!$stmt->execute()) {
+                    $err = 1;
+
+                    $salida['err'] = $err;
+                    echo json_encode($salida);
+                }
+
+                if($err == 0) {
+                    $salida['err'] = $err;
+
+                    echo json_encode($salida);
+                }
+
+                $stmt->close();
+                $link->close();
+                
+                break;
+            case 'obtenerCarrito':
+                $idCarrito = $_GET['idCarrito'];
+
+                $stmt = $link->prepare('CALL p_obtenerCarrito(?)');
+                $stmt->bind_param('i', $idCarrito);
+
+                if($stmt->execute()) {
+                    $row = mysqli_fetch_array($stmt->get_result(), MYSQLI_ASSOC);
+                } else {
+                    $err = 1;
+
+                    $salida['err'] = $err;
+                    echo json_encode($salida);
+                }
+
+                if($err == 0) {
+                    $salida['err'] = $err;
+                    $salida['res'] = $row;
+
+                    echo json_encode($salida);
+                }
+
+                $stmt->close();
+                $link->close();
+                break;
+            case 'crearPedido':
+                $numPedido = $_GET['numPedido'];
+                $idUsuario = $_GET['idUsuario'];
+                $idCarrito = $_GET['idCarrito'];
+
+                $stmt = $link->prepare('CALL p_crearPedido(?,?,?)');
+                $stmt->bind_param('sii', $numPedido, $idUsuario, $idCarrito);
 
                 if($stmt->execute()) {
                     $row = mysqli_fetch_array($stmt->get_result(), MYSQLI_ASSOC);

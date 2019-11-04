@@ -3,7 +3,7 @@
 <div class="right-side-cart-area">
     <!-- Cart Button -->
     <div class="cart-button">
-        <a href="#" id="rightSideCart"><img src="img/core-img/bag.svg" alt=""> <span id="spRCantCarrito">0</span></a>
+        <a href="#" id="rightSideCart"><img src="img/core-img/bag.svg" alt=""> <span id="spRCantCarrito"></span></a>
     </div>
 
     <div class="cart-content d-flex">
@@ -14,9 +14,9 @@
         </div>
 
         <!-- Cart Summary -->
-        <div class="cart-amount-summary">
+        <div class="cart-amount-summary" id="cartResumen">
 
-            <h2>Summary</h2>
+            <h2>Resumen</h2>
             <ul class="summary-table">
                 <li><span>subtotal:</span> <span>$274.00</span></li>
                 <li><span>delivery:</span> <span>Free</span></li>

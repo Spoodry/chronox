@@ -152,3 +152,45 @@ CREATE PROCEDURE p_cantProductosCarrito(
     p_idCarrito INT
 )
 SELECT COUNT(*) FROM productosEnCarrito WHERE idCarrito = p_idCarrito;
+
+CREATE PROCEDURE p_eliminarDelCarrito(
+    p_idProductoCarrito INT
+)
+DELETE FROM productosEnCarrito WHERE id = p_idProductoCarrito;
+
+CREATE PROCEDURE p_actualizarTotalCarrito(
+    p_total DECIMAL(10,2),
+    p_idCarrito INT
+)
+UPDATE carrito SET total = p_total WHERE id = p_idCarrito;
+
+CREATE PROCEDURE p_obtenerCarrito(
+    p_idCarrito INT
+)
+SELECT * FROM carrito WHERE id = p_idCarrito;
+
+CREATE TABLE pedidos(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    numPedido VARCHAR(32),
+    idUsuario INT,
+    idCarrito INT
+);
+
+ALTER TABLE pedidos
+    ADD CONSTRAINT idUsuario_FK FOREIGN KEY(idUsuario) REFERENCES usuarios(id);
+
+ALTER TABLE pedidos
+    ADD CONSTRAINT idCarrito_FK FOREIGN KEY(idCarrito) REFERENCES carrito(id);
+
+CREATE PROCEDURE p_crearPedido(
+    p_numPedido VARCHAR(32),
+    p_idUsuario INT,
+    p_idCarrito INT
+)
+INSERT INTO pedidos(numPedido, idUsuario, idCarrito) VALUES(p_numPedido, p_idUsuario, p_idCarrito);
+SELECT numPedido FROM pedidos ORDER BY id DESC LIMIT 1;
+
+
+
+
+INSERT INTO 

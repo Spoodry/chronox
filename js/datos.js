@@ -12,6 +12,7 @@ function crearUsuarioTemp(hayUsuario) {
                 if(data.err == 1) {
                     alert("error");
                 } else {
+                    location.reload();
                 }
             }
         });
