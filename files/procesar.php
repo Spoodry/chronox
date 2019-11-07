@@ -393,6 +393,42 @@
                 $stmt->close();
                 $link->close();
                 break;
+            case 'obtenerInfoProducto':
+                $idProducto = $_GET['idProducto'];
+
+                $stmt = $link->prepare('CALL p_obtenerInfoProducto(?)');
+                $stmt->bind_param('i', $idProducto);
+
+                if($stmt->execute()) {
+                    $rows = mysqli_fetch_all($stmt->get_result(), MYSQLI_ASSOC);
+
+                    for($i = 0; $i < count($rows); $i++) {
+                        $rows[$i]['nombre'] = utf8_encode($rows[$i]['nombre']);
+                        $rows[$i]['marca'] = utf8_encode($rows[$i]['marca']);
+                        $rows[$i]['modelo'] = utf8_encode($rows[$i]['modelo']);
+                        $rows[$i]['color'] = utf8_encode($rows[$i]['color']);
+                        $rows[$i]['descripcion'] = utf8_encode($rows[$i]['descripcion']);
+                        $rows[$i]['caracteristicas'] = utf8_encode($rows[$i]['caracteristicas']);
+                        $rows[$i]['tipoPublico'] = utf8_encode($rows[$i]['tipoPublico']);
+                        $rows[$i]['tipoReloj'] = utf8_encode($rows[$i]['tipoReloj']);
+                    }
+                } else {
+                    $err = 1;
+
+                    $salida['err'] = $err;
+                    echo json_encode($salida);
+                }
+
+                if($err == 0) {
+                    $salida['err'] = $err;
+                    $salida['res'] = $rows;
+                    
+                    echo json_encode($salida);
+                }
+
+                $stmt->close();
+                $link->close();
+                break;
             default:
                 # code...
                 break;

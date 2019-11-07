@@ -34,7 +34,7 @@
                 }
             }
         });
-        $('.product_thumbnail_slides').owlCarousel({
+        /*$('.product_thumbnail_slides').owlCarousel({
             items: 1,
             margin: 0,
             loop: true,
@@ -44,7 +44,7 @@
             autoplay: true,
             autoplayTimeout: 5000,
             smartSpeed: 1000
-        });
+        });*/
     }
 
     // :: Header Cart Active Code

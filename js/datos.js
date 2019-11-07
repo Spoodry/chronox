@@ -35,3 +35,54 @@ function obtenerIdCarrito() {
         }
     });
 }
+
+function obtenerInfoProducto(idProducto) {
+    if(idProducto != -1) {
+        $.ajax({
+            data: "opc=obtenerInfoProducto&idProducto=" + idProducto,
+            type: "GET",
+            dataType: "json",
+            url: "files/procesar.php",
+            success: function(data) {
+                if(data.err == 1) {
+                    alert("error");
+                } else {
+                    console.log(data.res);
+                    datos = data.res[0];
+                    $("#marca").html(datos['marca']);
+                    $("#nombreProducto").html(datos['nombre']);
+                    $("#precio").html("$" + datos['precio'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+
+                    var carrusel = "";
+                    for (let i = 1; i <= datos['cantImagenes']; i++) {
+                        var extensionImagen = "jpg";
+                        if(datos['marca'] == "Huawei" || datos['marca'] == "Omega")
+                            extensionImagen = "png";
+                        carrusel += "<img src=\"img/product-img/" + datos['nombreImagen'] + "-" + i + "-B." + extensionImagen + "\" alt=\"\">";
+                        //$("#imgCarrusel").trigger('add.owl.carousel', [carrusel]).trigger('refresh.owl.carousel');
+                    }
+
+                    //add.owl.carousel();
+                    $("#imgCarrusel").html(carrusel);
+
+                    $('.product_thumbnail_slides').owlCarousel({
+                        items: 1,
+                        margin: 0,
+                        loop: true,
+                        nav: true,
+                        navText: ["<img src='img/core-img/long-arrow-left.svg' alt=''>", "<img src='img/core-img/long-arrow-right.svg' alt=''>"],
+                        dots: false,
+                        autoplay: true,
+                        autoplayTimeout: 5000,
+                        smartSpeed: 1000
+                    });
+
+                    $("#descripcion").html(datos['descripcion']);
+
+                }
+            }
+        });
+    } else {
+        location = "index.php";
+    }
+}

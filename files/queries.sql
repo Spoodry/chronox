@@ -190,7 +190,27 @@ CREATE PROCEDURE p_crearPedido(
 INSERT INTO pedidos(numPedido, idUsuario, idCarrito) VALUES(p_numPedido, p_idUsuario, p_idCarrito);
 SELECT numPedido FROM pedidos ORDER BY id DESC LIMIT 1;
 
+ALTER TABLE productos
+    ADD idTipo INT NOT NULL AFTER idTipoPublico;
 
+ALTER TABLE productos
+    ADD CONSTRAINT idTipoReloj_FK FOREIGN KEY(idTipoReloj) REFERENCES tipoReloj(id);
 
+CREATE TABLE tipoReloj(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(32) NOT NULL
+);
 
-INSERT INTO 
+INSERT INTO tipoReloj(nombre) VALUES('');
+INSERT INTO tipoReloj(nombre) VALUES('Analógico');
+INSERT INTO tipoReloj(nombre) VALUES('Digital');
+INSERT INTO tipoReloj(nombre) VALUES('Smartwatch');
+
+CREATE PROCEDURE p_obtenerInfoProducto(
+    p_idProducto INT
+)
+SELECT p.id, p.nombre, p.precio, m.nombre as marca, p.modelo, c.nombre as color, p.descripcion, p.caracteristicas, tp.nombre as tipoPublico, tr.nombre as tipoReloj, p.nombreImagen, p.cantImagenes FROM productos as p 
+inner join marcas as m on p.idMarca = m.id
+inner join colores as c on p.idColor = c.id
+inner join tipoPublico as tp on p.idTipoPublico = tp.id
+inner join tipoReloj as tr on p.idTipoReloj = tr.id WHERE p.id = p_idProducto;

@@ -50,7 +50,7 @@
                             <ul class="dropdown">
                                 <li><a href="index.html">Home</a></li>
                                 <li><a href="shop.html">Tienda</a></li>
-                                <li><a href="single-product-details.html">Product Details</a></li>
+                                <li><a href="single-product-details.php">Product Details</a></li>
                                 <li><a href="checkout.html">Checkout</a></li>
                                 <li><a href="blog.html">Blog</a></li>
                                 <li><a href="single-blog.html">Single Blog</a></li>
