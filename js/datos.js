@@ -54,6 +54,7 @@ function obtenerInfoProducto(idProducto) {
                     $("#precio").html("$" + datos['precio'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 
                     var carrusel = "";
+                    console.log(datos['cantImagenes']);
                     for (let i = 1; i <= datos['cantImagenes']; i++) {
                         var extensionImagen = "jpg";
                         if(datos['marca'] == "Huawei" || datos['marca'] == "Omega")
@@ -62,14 +63,19 @@ function obtenerInfoProducto(idProducto) {
                         //$("#imgCarrusel").trigger('add.owl.carousel', [carrusel]).trigger('refresh.owl.carousel');
                     }
 
+                    var canLoop = true;
+
+                    if(datos['cantImagenes'] == 1)
+                        canLoop = false;
+
                     //add.owl.carousel();
                     $("#imgCarrusel").html(carrusel);
 
                     $('.product_thumbnail_slides').owlCarousel({
                         items: 1,
                         margin: 0,
-                        loop: true,
-                        nav: true,
+                        loop: canLoop,
+                        nav: canLoop,
                         navText: ["<img src='img/core-img/long-arrow-left.svg' alt=''>", "<img src='img/core-img/long-arrow-right.svg' alt=''>"],
                         dots: false,
                         autoplay: true,
@@ -78,6 +84,8 @@ function obtenerInfoProducto(idProducto) {
                     });
 
                     $("#descripcion").html(datos['descripcion']);
+
+                    document.title = datos['nombre'];
 
                 }
             }

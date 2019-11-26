@@ -87,10 +87,10 @@
                                     <li data-toggle="collapse" data-target="#tipoReloj" class="collapsed">
                                         <a href="#">tipos</a>
                                         <ul class="sub-menu collapse" id="tipoReloj">
-                                            <li><a href="#">Todos</a></li>
-                                            <li><a href="#">Analógico</a></li>
-                                            <li><a href="#">Digital</a></li>
-                                            <li><a href="#">Smartwatch</a></li>
+                                            <li><a href="#" onclick="obtenerProductos('todo','')">Todos</a></li>
+                                            <li><a class="porTipoReloj" href="#" value="1">Analógico</a></li>
+                                            <li><a class="porTipoReloj" href="#" value="2">Digital</a></li>
+                                            <li><a class="porTipoReloj" href="#" value="3">Smartwatch</a></li>
                                         </ul>
                                     </li>
                                     <!-- Single Item -->
@@ -131,17 +131,7 @@
                             <!-- Widget Title 2 -->
                             <p class="widget-title2 mb-30">Color</p>
                             <div class="widget-desc">
-                                <ul class="d-flex">
-                                    <li><a href="#" class="color1"></a></li>
-                                    <li><a href="#" class="color2"></a></li>
-                                    <li><a href="#" class="color3"></a></li>
-                                    <li><a href="#" class="color4"></a></li>
-                                    <li><a href="#" class="color5"></a></li>
-                                    <li><a href="#" class="color6"></a></li>
-                                    <li><a href="#" class="color7"></a></li>
-                                    <li><a href="#" class="color8"></a></li>
-                                    <li><a href="#" class="color9"></a></li>
-                                    <li><a href="#" class="color10"></a></li>
+                                <ul class="d-flex" id="lsColores">
                                 </ul>
                             </div>
                         </div>
@@ -228,6 +218,7 @@
         var sessIdUsuario = <?php if(isset($_SESSION['IdUsuario'])) { echo $_SESSION['IdUsuario']; } else { echo -1; } ?>;
         var idCarrito;
         obtenerIdCarrito();
+        obtenerColores();
     </script>
 
 </body>

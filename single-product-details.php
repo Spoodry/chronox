@@ -15,7 +15,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>Essence - Fashion Ecommerce Template</title>
+    <title>Chronox</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="img/core-img/favicon.ico">
@@ -44,18 +44,17 @@
 
         <!-- Single Product Thumb -->
         <div class="single_product_thumb clearfix">
-            <div class="product_thumbnail_slides owl-carousel" id="imgCarrusel">
-            </div>
+            <div class="product_thumbnail_slides owl-carousel" id="imgCarrusel"></div>
         </div>
 
         <!-- Single Product Description -->
         <div class="single_product_desc clearfix">
-            <span id="marca">mango</span>
+            <span id="marca"></span>
             <a href="cart.html">
-                <h2 id="nombreProducto">One Shoulder Glitter Midi Dress</h2>
+                <h2 id="nombreProducto"></h2>
             </a>
-            <p class="product-price" id="precio">$49.00</p>
-            <p class="product-desc" id="descripcion">Mauris viverra cursus ante laoreet eleifend. Donec vel fringilla ante. Aenean finibus velit id urna vehicula, nec maximus est sollicitudin.</p>
+            <p class="product-price" id="precio"></p>
+            <p class="product-desc" id="descripcion"></p>
 
             <!-- Form -->
             <form class="cart-form clearfix" method="post">

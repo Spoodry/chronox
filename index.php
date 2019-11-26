@@ -139,7 +139,7 @@
                             <!-- Product Description -->
                             <div class="product-description">
                                 <span>Casio</span>
-                                <a href="single-product-details.html">
+                                <a href="single-product-details.php?idProducto=26">
                                     <h6>Reloj Casio MTP-1183A-2A-Plateado</h6>
                                 </a>
                                 <p class="product-price">$769.00 MX</p>
@@ -167,7 +167,7 @@
                             <!-- Product Description -->
                             <div class="product-description">
                                 <span>Rolex</span>
-                                <a href="single-product-details.html">
+                                <a href="single-product-details.php?idProducto=46">
                                     <h6>Rolex Lady-DateJust</h6>
                                 </a>
                                 <p class="product-price">$737,661.44 MX</p>
@@ -201,7 +201,7 @@
                             <!-- Product Description -->
                             <div class="product-description">
                                 <span>seiko</span>
-                                <a href="single-product-details.html">
+                                <a href="single-product-details.php?idProducto=22">
                                     <h6>Seiko 5 Sports</h6>
                                 </a>
                                 <p class="product-price">$6,400.00 MX</p>
@@ -237,7 +237,7 @@
                             <!-- Product Description -->
                             <div class="product-description">
                                 <span>omega</span>
-                                <a href="single-product-details.html">
+                                <a href="single-product-details.php?idProducto=23">
                                     <h6>Omega Seamaster AQUA TERRA 150M</h6>
                                 </a>
                                 <p class="product-price">$913,500.00 MX</p>

@@ -124,6 +124,39 @@
                 $stmt->close();
                 $link->close();
                 break;
+            case 'obtenerProductosXTipoReloj':
+                $idTipoReloj = $_GET['idTipoReloj'];
+
+                $stmt = $link->prepare('CALL p_obtenerProductosXTipoReloj(?)');
+                $stmt->bind_param("i", $idTipoReloj);
+
+                if($stmt->execute()) {
+                    $rows = mysqli_fetch_all($stmt->get_result(), MYSQLI_ASSOC);
+
+                    for($i = 0; $i < count($rows); $i++) {
+                        $rows[$i]['producto'] = utf8_encode($rows[$i]['producto']);
+                        $rows[$i]['marca'] = utf8_encode($rows[$i]['marca']);
+                        $rows[$i]['tipoPublico'] = utf8_encode($rows[$i]['tipoPublico']);
+                        $rows[$i]['nombreImagen'] = utf8_encode($rows[$i]['nombreImagen']);
+                        $rows[$i]['tipoReloj'] = utf8_encode($rows[$i]['tipoReloj']);
+                    }
+                } else {
+                    $err = 1;
+
+                    $salida['err'] = $err;
+                    echo json_encode($salida);
+                }
+
+                if($err == 0) {
+                    $salida['err'] = $err;
+                    $salida['res'] = $rows;
+
+                    echo json_encode($salida);
+                }
+
+                $stmt->close();
+                $link->close();
+                break;
             case 'cantProductosXMarca':
                 $idMarca = $_GET['idMarca'];
 
@@ -153,6 +186,30 @@
                 $idTipoPublico = $_GET['idTipoPublico'];
                 $stmt = $link->prepare('CALL p_cantProductosXTipoPublico(?)');
                 $stmt->bind_param('i', $idTipoPublico);
+
+                if($stmt->execute()) {
+                    $row = mysqli_fetch_array($stmt->get_result(), MYSQLI_ASSOC);
+                } else {
+                    $err = 1;
+
+                    $salida['err'] = $err;
+                    echo json_encode($salida);
+                }
+
+                if($err == 0) {
+                    $salida['err'] = $err;
+                    $salida['res'] = $row;
+
+                    echo json_encode($salida);
+                }
+
+                $stmt->close();
+                $link->close();
+                break;
+            case 'cantProductosXTipoReloj':
+                $idTipoReloj = $_GET['idTipoReloj'];
+                $stmt = $link->prepare('CALL p_cantProductosXTipoReloj(?)');
+                $stmt->bind_param('i', $idTipoReloj);
 
                 if($stmt->execute()) {
                     $row = mysqli_fetch_array($stmt->get_result(), MYSQLI_ASSOC);
@@ -423,6 +480,32 @@
                     $salida['err'] = $err;
                     $salida['res'] = $rows;
                     
+                    echo json_encode($salida);
+                }
+
+                $stmt->close();
+                $link->close();
+                break;
+            case 'obtenerColores':
+                $stmt = $link->prepare('CALL p_obtenerColores()');
+
+                if($stmt->execute()) {
+                    $rows = mysqli_fetch_all($stmt->get_result(), MYSQLI_ASSOC);
+
+                    for($i = 0; $i < count($rows); $i++) {
+                        $rows[$i]['color'] = utf8_encode($rows[$i]['color']);
+                    }
+                } else {
+                    $err = 1;
+
+                    $salida['err'] = $err;
+                    echo json_encode($salida);
+                }
+
+                if($err == 0) {
+                    $salida['err'] = $err;
+                    $salida['res'] = $rows;
+
                     echo json_encode($salida);
                 }
 

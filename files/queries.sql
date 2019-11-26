@@ -214,3 +214,23 @@ inner join marcas as m on p.idMarca = m.id
 inner join colores as c on p.idColor = c.id
 inner join tipoPublico as tp on p.idTipoPublico = tp.id
 inner join tipoReloj as tr on p.idTipoReloj = tr.id WHERE p.id = p_idProducto;
+
+CREATE PROCEDURE p_obtenerProductosXTipoReloj(
+    p_idTipoReloj INT    
+)
+SELECT p.id, p.nombre as producto, m.nombre as marca, tp.nombre as tipoPublico, tr.nombre as tipoReloj, p.precio, p.nombreImagen, p.cantImagenes , p.idTipoReloj 
+FROM productos as p 
+inner join tipoPublico as tp ON p.idTipoPublico = tp.id 
+inner join marcas as m ON m.id = p.idMarca 
+inner join tipoReloj as tr ON p.idTipoReloj = tr.id
+WHERE p.idTipoReloj = p_idTipoReloj;
+
+CREATE PROCEDURE p_cantProductosXTipoReloj(
+    p_idTipoReloj INT
+)
+SELECT COUNT(*) as cantProductos FROM productos WHERE idTipoReloj = p_idTipoReloj;
+
+CREATE PROCEDURE p_obtenerColores(
+)
+SELECT id, nombre AS color, RGB FROM colores;
+

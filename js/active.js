@@ -37,8 +37,8 @@
         /*$('.product_thumbnail_slides').owlCarousel({
             items: 1,
             margin: 0,
-            loop: true,
-            nav: true,
+            loop: false,
+            nav: false,
             navText: ["<img src='img/core-img/long-arrow-left.svg' alt=''>", "<img src='img/core-img/long-arrow-right.svg' alt=''>"],
             dots: false,
             autoplay: true,

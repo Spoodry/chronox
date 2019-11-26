@@ -8,6 +8,11 @@ $(".porTipoPublico").click(function() {
     obtenerProductosXTipoPublico(idTipoPublico);
 });
 
+$(".porTipoReloj").click(function() {
+    var idTipoReloj = $(this).attr("value");
+    obtenerProductosXTipoReloj(idTipoReloj);
+});
+
 function obtenerProductos(tipo, opcion) {
     if(tipo == "todo") {
         console.log("entra todo");
@@ -45,6 +50,8 @@ function obtenerProductos(tipo, opcion) {
         obtenerProductosXMarca(opcion);
     } else if(tipo == "tipoPublico") {
         obtenerProductosXTipoPublico(opcion);
+    } else if(tipo == "tipoReloj") {
+        obtenerProductosXTipoReloj(opcion);
     }
     
 }
@@ -119,6 +126,41 @@ function obtenerProductosXTipoPublico(idTipoPublico) {
     });
 }
 
+function obtenerProductosXTipoReloj(idTipoReloj) {
+    $.ajax({
+        data: "opc=obtenerProductosXTipoReloj&idTipoReloj=" + idTipoReloj,
+        type: "GET",
+        dataType: "json",
+        url: "files/procesar.php",
+        success: function(data) {
+            if(data.err == 1) {
+                alert("error");
+            } else {
+                console.log(data.res);
+                $("#datosProductos").empty();
+
+                var informacion = "";
+                var tipoReloj = "";
+
+                $.each(data.res, function(index, array) {
+                    informacion += crearInfoProducto(array);    
+                    tipoReloj = array['tipoReloj'];
+                });
+
+                $("#tiendaTitulo").html(tipoReloj);
+                $("#datosProductos").append(informacion);
+
+                obtenerCantProductosXTipoReloj(idTipoReloj);
+
+                $(".add-to-carrito").click(function() {
+                    addToCarrito(this);
+                });
+
+            }
+        }
+    });
+}
+
 function crearInfoProducto(array) {
     var informacion = "";
 
@@ -131,7 +173,7 @@ function crearInfoProducto(array) {
         informacion += "<img class=\"hover-img\" src=\"img/product-img/" + array['nombreImagen'] + "-2-B." + extensionImagen + "\" alt=\"\">";
     informacion += "<div class=\"product-favourite\">";
     informacion += "<a href=\"#\" class=\"favme fa fa-heart\"></a></div></div><div class=\"product-description\">";
-    informacion += "<span>" + array['marca'] + "</span><a href=\"single-product-details.html\">";
+    informacion += "<span>" + array['marca'] + "</span><a href=\"single-product-details.php?idProducto=" + array['id'] + "\">";
     informacion += "<h6>" + array['producto'] + "</h6></a><p class=\"product-price\">";
     informacion += "$" + array['precio'].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</p><div class=\"hover-content\">";
     informacion += "<div class=\"add-to-cart-btn\"><a class=\"btn essence-btn add-to-carrito\" value=\"" + array['id'] + "\" style=\"color: white;\">añadir al carrito</a>";
@@ -228,6 +270,59 @@ function obtenerCantProductosXTipoPublico(idTipoPublico) {
 
                 $("#cantProductos").append(informacion);
 
+            }
+        }
+    });
+}
+
+function obtenerCantProductosXTipoReloj(idTipoReloj) {
+    $.ajax({
+        data: "opc=cantProductosXTipoReloj&idTipoReloj=" + idTipoReloj,
+        type: "GET",
+        dataType: "json",
+        url: "files/procesar.php",
+        success: function(data) {
+            if(data.err == 1) {
+                alert("error");
+            } else {
+                console.log(data.res);
+
+                cantidadProductos = data.res['cantProductos'];
+                console.log(cantidadProductos);
+
+                $("#cantProductos").empty();
+
+                informacion = "<span>" + cantidadProductos + "</span>";
+                if(cantidadProductos == 1) {
+                    informacion += " producto encontrado";
+                } else {
+                    informacion += " productos encontrados";
+                }
+
+                $("#cantProductos").append(informacion);
+
+            }
+        }
+    });
+}
+
+function obtenerColores() {
+    $.ajax({
+        data: "opc=obtenerColores",
+        type: "GET",
+        dataType: "json",
+        url: "files/procesar.php",
+        success: function(data) {
+            if(data.err == 1) {
+                alert("error");
+            } else {
+                console.log(data.res);
+                var colores = "";
+                $.each(data.res, function(index, array) {
+                    colores += "<li><a href=\"#\" title=\"" + array['color'] + "\" style=\"background-color: rgb(" + array['rgb'] + ");\"></a></li>";
+                });
+
+                $("#lsColores").html(colores);
             }
         }
     });
