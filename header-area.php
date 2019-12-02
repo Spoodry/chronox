@@ -31,7 +31,7 @@
                                 </ul>
                                 <ul class="single-mega cn-col-4">
                                     <li class="title">Tipos</li>
-                                    <li><a href="#">Analógico</a></li>
+                                    <li><a href="shop.php?tipo=tipoReloj&opc=1">Analógico</a></li>
                                     <li><a href="#">Digital</a></li>
                                     <li><a href="#">Smartwatch</a></li>
                                 </ul>

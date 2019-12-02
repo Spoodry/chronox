@@ -182,13 +182,31 @@ ALTER TABLE pedidos
 ALTER TABLE pedidos
     ADD CONSTRAINT idCarrito_FK FOREIGN KEY(idCarrito) REFERENCES carrito(id);
 
+DELIMITER $$
 CREATE PROCEDURE p_crearPedido(
     p_numPedido VARCHAR(32),
     p_idUsuario INT,
-    p_idCarrito INT
+    p_idCarrito INT,
+    p_nombre VARCHAR(64),
+    p_apellido VARCHAR(64),
+    p_empresa VARCHAR(32),
+    p_pais VARCHAR(32),
+    p_calle VARCHAR(32),
+    p_numExterior VARCHAR(8),
+    p_numInterior VARCHAR(8),
+    p_codigoPostal VARCHAR(8),
+    p_ciudad VARCHAR(32),
+    p_estado VARCHAR(32),
+    p_celular VARCHAR(16),
+    p_correo VARCHAR(32)
 )
-INSERT INTO pedidos(numPedido, idUsuario, idCarrito) VALUES(p_numPedido, p_idUsuario, p_idCarrito);
-SELECT numPedido FROM pedidos ORDER BY id DESC LIMIT 1;
+BEGIN
+    INSERT INTO pedidos(numPedido, idUsuario, idCarrito, nombre, apellido, empresa, pais, calle, numExterior, numInterior, codigoPostal, 
+    ciudad, estado, celular, correo) VALUES(p_numPedido, p_idUsuario, p_idCarrito, p_nombre, p_apellido, p_empresa, p_pais, p_calle, 
+    p_numExterior, p_numInterior, p_codigoPostal, p_ciudad, p_estado, p_celular, p_correo);
+    SELECT numPedido FROM pedidos ORDER BY id DESC LIMIT 1;
+END$$
+DELIMITER ;
 
 ALTER TABLE productos
     ADD idTipo INT NOT NULL AFTER idTipoPublico;
@@ -234,3 +252,38 @@ CREATE PROCEDURE p_obtenerColores(
 )
 SELECT id, nombre AS color, RGB FROM colores;
 
+ALTER TABLE pedidos
+    ADD nombre VARCHAR(64);
+
+ALTER TABLE pedidos
+    ADD apellido VARCHAR(64);
+
+ALTER TABLE pedidos
+    ADD empresa VARCHAR(32);
+
+ALTER TABLE pedidos
+    ADD pais VARCHAR(32);
+
+ALTER TABLE pedidos
+    ADD calle VARCHAR(32);
+
+ALTER TABLE pedidos
+    ADD numExterior VARCHAR(8);
+
+ALTER TABLE pedidos
+    ADD numInterior VARCHAR(8);
+
+ALTER TABLE pedidos
+    ADD codigoPostal VARCHAR(8);
+
+ALTER TABLE pedidos
+    ADD ciudad VARCHAR(32);
+
+ALTER TABLE pedidos
+    ADD estado VARCHAR(32);
+
+ALTER TABLE pedidos
+    ADD celular VARCHAR(16);
+
+ALTER TABLE pedidos
+    ADD correo VARCHAR(32);

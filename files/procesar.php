@@ -5,9 +5,12 @@
 
     $err = 0;
     $link = Conectar();
-
-    if(isset($_GET['opc'])) {
-        $opcion = $_GET['opc'];
+    
+    if(isset($_GET['opc']) || isset($_POST['opc'])) {
+        if(isset($_GET['opc']))
+            $opcion = $_GET['opc'];
+        if(isset($_POST['opc']))
+            $opcion = $_POST['opc'];
 
         switch ($opcion) {
             case 'obtenerProductos':
@@ -424,12 +427,24 @@
                 $link->close();
                 break;
             case 'crearPedido':
-                $numPedido = $_GET['numPedido'];
-                $idUsuario = $_GET['idUsuario'];
-                $idCarrito = $_GET['idCarrito'];
-
-                $stmt = $link->prepare('CALL p_crearPedido(?,?,?)');
-                $stmt->bind_param('sii', $numPedido, $idUsuario, $idCarrito);
+                $numPedido = $_POST['numPedido'];
+                $idUsuario = $_POST['idUsuario'];
+                $idCarrito = $_POST['idCarrito'];
+                $nombre = $_POST['nombre'];
+                $apellido = $_POST['apellido'];
+                $empresa = $_POST['empresa'];
+                $pais = $_POST['pais'];
+                $calle = $_POST['calle'];
+                $numExterior = $_POST['numExterior'];
+                $numInterior = $_POST['numInterior'];
+                $codigoPostal = $_POST['codigoPostal'];
+                $ciudad = $_POST['ciudad'];
+                $estado = $_POST['estado'];
+                $celular = $_POST['celular'];
+                $correo = $_POST['correo'];
+                
+                $stmt = $link->prepare('CALL p_crearPedido(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
+                $stmt->bind_param('siissssssssssss', $numPedido, $idUsuario, $idCarrito, $nombre, $apellido, $empresa, $pais, $calle, $numExterior, $numInterior, $codigoPostal, $ciudad, $estado, $celular, $correo);
 
                 if($stmt->execute()) {
                     $row = mysqli_fetch_array($stmt->get_result(), MYSQLI_ASSOC);

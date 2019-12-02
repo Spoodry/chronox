@@ -11,6 +11,8 @@ function confirmarPedido() {
         informacionCompleta = false;
     else if($("#direccion").val() == "")
         informacionCompleta = false;
+    else if($("#numExterior").val() == "")
+        informacionCompleta = false;
     else if($("#codigoPostal").val() == "")
         informacionCompleta = false;
     else if($("#ciudad").val() == "")
@@ -21,27 +23,33 @@ function confirmarPedido() {
         informacionCompleta = false;
     else if($("#email").val() == "")
         informacionCompleta = false;
-
+    
     if(sessIdUsuario != -1) {
         if(informacionCompleta) {
             var fecha = new Date();
             var numPedido = "" + fecha.getFullYear() + fecha.getMonth() + fecha.getDate() + fecha.getHours() + fecha.getMinutes() + fecha.getSeconds();
+            var datos = $("#formPedido").serialize() + "&" + $.param({'numPedido' : numPedido}) + "&" + $.param({'idUsuario' : sessIdUsuario}) + "&" + $.param({'idCarrito' : idCarrito}) + "&" + $.param({'opc' : 'crearPedido'});
+            console.log(datos);
+
             $.ajax({
-                data: "opc=crearPedido&numPedido=" + numPedido + "&idUsuario=" + sessIdUsuario + "&idCarrito=" + idCarrito,
-                type: "GET",
+                data: datos,
+                type: "POST",
                 dataType: "json",
                 url: "files/procesar.php",
                 success: function(data) {
                     if(data.err == 1) {
-                        alert("error");
+                        Swal.fire("Error","No se creó el pedido","error");
                     } else {
-                        alert("N° Pedido #" + data.res['numPedido']);
-                        location = "index.php";
+                        Swal.fire("Pedido exitoso", "N° Pedido #" + data.res['numPedido'], "success").then((result) => {
+                            if (result.value) {
+                                location = "index.php";
+                            }
+                          });
                     }
                 }
             });
         } else {
-            alert("Información incompleta, llene los campos obligatorios");
+            Swal.fire("Información incompleta", "Llene los campos obligatorios", "warning");
         }
     }
 }

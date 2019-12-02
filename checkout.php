@@ -64,51 +64,58 @@
                             <h5>Billing Address</h5>
                         </div>
 
-                        <form action="#" method="post">
+                        <form id="formPedido" action="#" method="post">
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="first_name">Nombre <span>*</span></label>
-                                    <input type="text" class="form-control" id="nombre" value="" required>
+                                    <label for="nombre">Nombre <span>*</span></label>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" value="" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="last_name">Apellido <span>*</span></label>
-                                    <input type="text" class="form-control" id="apellido" value="" required>
+                                    <input type="text" class="form-control" id="apellido" name="apellido" value="" required>
                                 </div>
                                 <div class="col-12 mb-3">
-                                    <label for="company">Company Name</label>
-                                    <input type="text" class="form-control" id="company" value="">
+                                    <label for="company">Empresa</label>
+                                    <input type="text" class="form-control" id="empresa" name="empresa" value="">
                                 </div>
                                 <div class="col-12 mb-3">
                                     <label for="country">País <span>*</span></label>
-                                    <select class="w-100" id="pais">
+                                    <select class="w-100" id="pais" name="pais">
                                         <option value="mex">México</option>
                                         <option value="eua">Estados Unidos</option>
                                     </select>
                                 </div>
                                 <div class="col-12 mb-3">
                                     <label for="street_address">Dirección <span>*</span></label>
-                                    <input type="text" class="form-control mb-3" id="direccion" value="">
-                                    <input type="text" class="form-control" id="street_address2" value="">
+                                    <input type="text" class="form-control" id="direccion" name="calle" value="" required>
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <label for="numExterior">Número exterior <span>*</span></label>
+                                    <input type="text" class="form-control" id="numExterior" name="numExterior" value="" required>
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <label for="numInterior">Número interior</label>
+                                    <input type="text" class="form-control" id="numInterior" name="numInterior" value="">
                                 </div>
                                 <div class="col-12 mb-3">
                                     <label for="postcode">Código Postal <span>*</span></label>
-                                    <input type="text" class="form-control" id="codigoPostal" value="">
+                                    <input type="text" class="form-control" id="codigoPostal" name="codigoPostal" value="">
                                 </div>
                                 <div class="col-12 mb-3">
                                     <label for="city">Ciudad <span>*</span></label>
-                                    <input type="text" class="form-control" id="ciudad" value="">
+                                    <input type="text" class="form-control" id="ciudad" name="ciudad" value="">
                                 </div>
                                 <div class="col-12 mb-3">
                                     <label for="state">Estado <span>*</span></label>
-                                    <input type="text" class="form-control" id="estado" value="">
+                                    <input type="text" class="form-control" id="estado" name="estado" value="">
                                 </div>
                                 <div class="col-12 mb-3">
                                     <label for="phone_number">Número de celular <span>*</span></label>
-                                    <input type="number" class="form-control" id="celular" min="0" value="">
+                                    <input type="number" class="form-control" id="celular" name="celular" min="0" value="">
                                 </div>
                                 <div class="col-12 mb-4">
                                     <label for="email_address">Email <span>*</span></label>
-                                    <input type="email" class="form-control" id="email" value="">
+                                    <input type="email" class="form-control" id="email" name="correo" value="">
                                 </div>
 
                                 <div class="col-12">
@@ -220,6 +227,7 @@
     <script src="js/bootstrap.min.js"></script>
     <!-- Plugins js -->
     <script src="js/plugins.js"></script>
+    <script src="js/sweetalert2/sweetalert2.all.js"></script>
     <!-- Classy Nav js -->
     <script src="js/classy-nav.min.js"></script>
     <!-- Active js -->
