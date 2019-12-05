@@ -58,7 +58,7 @@
                                 <li><a href="#">Contact</a></li>
                             </ul>
                         </li>
-                        <li><a href="blog.html">FAQ</a></li>
+                        <li><a href="faq.php">FAQ</a></li>
                         <li><a href="contact.php">Contact</a></li>
                     </ul>
                 </div>

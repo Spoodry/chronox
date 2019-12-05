@@ -220,9 +220,9 @@
                         <div class="single-product-wrapper">
                             <!-- Product Image -->
                             <div class="product-img">
-                                <img src="img/product-img/OM-A-4-1-B.png" alt="">
+                                <img src="img/product-img/OM-A-4-1-B.jpg" alt="">
                                 <!-- Hover Thumb -->
-                                <img class="hover-img" src="img/product-img/OM-A-4-2-B.png" alt="">
+                                <img class="hover-img" src="img/product-img/OM-A-4-2-B.jpg" alt="">
 
                                 <!-- Product Badge
                                 <div class="product-badge new-badge">

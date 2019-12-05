@@ -46,13 +46,12 @@
         </div>
 
         <div class="contact-info">
-            <h2>How to Find Us</h2>
-            <p>Mauris viverra cursus ante laoreet eleifend. Donec vel fringilla ante. Aenean finibus velit id urna vehicula, nec maximus est sollicitudin.</p>
+            <h2>¿Cómo encontrarnos?</h2>
 
             <div class="contact-address mt-50">
-                <p><span>address:</span> 10 Suffolk st Soho, London, UK</p>
-                <p><span>telephone:</span> +12 34 567 890</p>
-                <p><a href="mailto:contact@essence.com">contact@essence.com</a></p>
+                <p><span>Dirección:</span> Iturbide #145 Zona Centro Altamira, Tamaulipas, MX</p>
+                <p><span>Teléfono:</span> +52 (833)-447-13-96</p>
+                <p><a href="mailto:chronox.me@gmail.com">chronox.me@gmail.com</a></p>
             </div>
         </div>
 
