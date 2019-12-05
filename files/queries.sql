@@ -205,6 +205,10 @@ BEGIN
     ciudad, estado, celular, correo) VALUES(p_numPedido, p_idUsuario, p_idCarrito, p_nombre, p_apellido, p_empresa, p_pais, p_calle, 
     p_numExterior, p_numInterior, p_codigoPostal, p_ciudad, p_estado, p_celular, p_correo);
     SELECT numPedido FROM pedidos ORDER BY id DESC LIMIT 1;
+    UPDATE carrito SET pagado = 1 WHERE id = p_idCarrito;
+    INSERT INTO carrito(total, pagado) VALUES(0.00, 0);
+    SET @p_idCarritoNuevo = (SELECT id FROM carrito ORDER BY id DESC LIMIT 1);
+    UPDATE usuarios SET idCarrito = @p_idCarritoNuevo WHERE id = p_idUsuario;
 END$$
 DELIMITER ;
 

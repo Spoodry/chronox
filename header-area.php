@@ -32,8 +32,8 @@
                                 <ul class="single-mega cn-col-4">
                                     <li class="title">Tipos</li>
                                     <li><a href="shop.php?tipo=tipoReloj&opc=1">Analógico</a></li>
-                                    <li><a href="#">Digital</a></li>
-                                    <li><a href="#">Smartwatch</a></li>
+                                    <li><a href="shop.php?tipo=tipoReloj&opc=2">Digital</a></li>
+                                    <li><a href="shop.php?tipo=tipoReloj&opc=3">Smartwatch</a></li>
                                 </ul>
                                 <ul class="single-mega cn-col-4">
                                     <li class="title">Público</li>
@@ -48,18 +48,18 @@
                         </li>
                         <li><a href="#">Pages</a>
                             <ul class="dropdown">
-                                <li><a href="index.html">Home</a></li>
-                                <li><a href="shop.html">Tienda</a></li>
-                                <li><a href="single-product-details.php">Product Details</a></li>
-                                <li><a href="checkout.html">Checkout</a></li>
-                                <li><a href="blog.html">Blog</a></li>
-                                <li><a href="single-blog.html">Single Blog</a></li>
-                                <li><a href="regular-page.html">Regular Page</a></li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">Tienda</a></li>
+                                <li><a href="#">Product Details</a></li>
+                                <li><a href="#">Checkout</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">Single Blog</a></li>
+                                <li><a href="#">Regular Page</a></li>
+                                <li><a href="#">Contact</a></li>
                             </ul>
                         </li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="blog.html">FAQ</a></li>
+                        <li><a href="contact.php">Contact</a></li>
                     </ul>
                 </div>
                 <!-- Nav End -->

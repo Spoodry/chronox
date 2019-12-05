@@ -149,3 +149,21 @@
     });
 
 })(jQuery);
+
+$("#facebook").click(function() {
+    var url = "https://www.facebook.com/Chrnonox-102110017936787/";
+
+    window.open(url, "_blank");
+});
+
+$("#twitter").click(function() {
+    var url = "https://twitter.com/Chronox6?s=08";
+
+    window.open(url, "_blank");
+});
+
+$("#instagram").click(function() {
+    var url = "https://instagram.com/chronox15?igshid=1n5xh2q2zbbuj";
+
+    window.open(url, "_blank");
+});

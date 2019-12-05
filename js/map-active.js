@@ -188,7 +188,7 @@ geocoder_map.geocode({
             position: map.getCenter()
         });
     } else {
-        alert("Geocode was not successful for the following reason: " + status);
+        Swal.fire("Error", "Geocode was not successful for the following reason: " + status, "error");
     }
 });
 var mapType = new google.maps.StyledMapType(stylez, {
