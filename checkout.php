@@ -157,50 +157,37 @@
                             <div class="card">
                                 <div class="card-header" role="tab" id="headingOne">
                                     <h6 class="mb-0">
-                                        <a data-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne"><i class="fa fa-circle-o mr-3"></i>Paypal</a>
+                                        <div class="form-group row mb-0 ml-0">
+                                            <input type="radio" class="mr-3" name="metodoEnvio"><a>Paypal</a>
+                                        </div>
                                     </h6>
-                                </div>
-
-                                <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
-                                    <div class="card-body">
-                                        <p></p>
-                                    </div>
                                 </div>
                             </div>
                             <div class="card">
-                                <div class="card-header" role="tab" id="headingTwo">
+                                <div class="card-header" role="tab" id="headingOne">
                                     <h6 class="mb-0">
-                                        <a class="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"><i class="fa fa-circle-o mr-3"></i>cobro a la entrega</a>
+                                        <div class="form-group row mb-0 ml-0">
+                                            <input type="radio" class="mr-3" name="metodoEnvio" checked><a>cobro a la entrega</a>
+                                        </div>
                                     </h6>
-                                </div>
-                                <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
-                                    <div class="card-body">
-                                        <p></p>
-                                    </div>
                                 </div>
                             </div>
                             <div class="card">
-                                <div class="card-header" role="tab" id="headingThree">
+                                <div class="card-header" role="tab" id="headingOne">
                                     <h6 class="mb-0">
-                                        <a class="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><i class="fa fa-circle-o mr-3"></i>tarjeta de crédito/débito</a>
+                                        <div class="form-group row mb-0 ml-0">
+                                            <input type="radio" class="mr-3" name="metodoEnvio"><a>tarjeta de crédito/débito</a>
+                                        </div>
                                     </h6>
-                                </div>
-                                <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
-                                    <div class="card-body">
-                                        <p></p>
-                                    </div>
                                 </div>
                             </div>
                             <div class="card">
-                                <div class="card-header" role="tab" id="headingFour">
+                                <div class="card-header" role="tab" id="headingOne">
                                     <h6 class="mb-0">
-                                        <a class="collapsed" data-toggle="collapse" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour"><i class="fa fa-circle-o mr-3"></i>Transferencia bancaria</a>
+                                        <div class="form-group row mb-0 ml-0">
+                                            <input type="radio" class="mr-3" name="metodoEnvio"><a>Transferencia bancaria</a>
+                                        </div>
                                     </h6>
-                                </div>
-                                <div id="collapseFour" class="collapse show" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
-                                    <div class="card-body">
-                                        <p></p>
-                                    </div>
                                 </div>
                             </div>
                         </div>

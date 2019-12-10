@@ -55,8 +55,6 @@ function actualizarCarrito() {
                 $.each(data.res, function(index, array) {
                     productos += "<div class=\"single-cart-item\"><a href=\"#\" class=\"product-image\">";
                     var extensionImagen = "jpg";
-                    if(array['marca'] == "Huawei" || array['marca'] == "Omega")
-                        extensionImagen = "png";
                     productos += "<img src=\"img/product-img/" + array['nombreImagen'] + "-1-B." + extensionImagen + "\" class=\"cart-thumb\" alt=\"\">";
                     productos += "<div class=\"cart-item-desc\"><span class=\"product-remove\"><i class=\"fa fa-close eliminar-to-carrito\" aria-hidden=\"true\" value=\"" + array['id'] + "\">";
                     productos += "</i></span><span class=\"badge\">" + array['marca'] + "</span><h6>" + array['nombre'] + "</h6>";

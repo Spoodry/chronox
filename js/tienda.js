@@ -166,8 +166,6 @@ function crearInfoProducto(array) {
 
     informacion += "<div class=\"col-12 col-sm-6 col-lg-4\"><div class=\"single-product-wrapper\">";
     var extensionImagen="jpg";
-    if(array['marca'] == "Huawei" || array['marca'] == "Omega")
-        extensionImagen="png";
     informacion += "<div class=\"product-img\"><img class=\"\" src=\"img/product-img/" + array['nombreImagen'] + "-1-B." + extensionImagen + "\" alt=\"\">";
     if(array['cantImagenes'] > 1)
         informacion += "<img class=\"hover-img\" src=\"img/product-img/" + array['nombreImagen'] + "-2-B." + extensionImagen + "\" alt=\"\">";

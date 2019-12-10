@@ -88,7 +88,7 @@
     <!-- ##### Top Catagory Area End ##### -->
 
     <!-- ##### CTA Area Start ##### -->
-    <div class="cta-area">
+    <!--<div class="cta-area">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -104,7 +104,12 @@
                 </div>
             </div>
         </div>
+    </div> -->
+
+    <div class="embed-responsive embed-responsive-21by9">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/Yk9Zcx0SMCU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
+
     <!-- ##### CTA Area End ##### -->
 
     <!-- ##### New Arrivals Area Start ##### -->

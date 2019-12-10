@@ -23,6 +23,8 @@
     <link rel="stylesheet" href="css/core-style.css">
     <link rel="stylesheet" href="style.css">
 
+    <link rel="stylesheet" href="js/leaflet/leaflet.css"/>
+
 </head>
 
 <body>
@@ -41,9 +43,7 @@
 
     <div class="contact-area d-flex align-items-center">
 
-        <div class="google-map">
-            <div id="googleMap"></div>
-        </div>
+        <div class="google-map" id="map" style="height: 500px;"></div>
 
         <div class="contact-info">
             <h2>¿Cómo encontrarnos?</h2>
@@ -79,7 +79,7 @@
     <script src="js/datos.js"></script>
     <script src="js/carrito.js"></script>
     <!-- Google Maps -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwuyLRa1uKNtbgx6xAJVmWy-zADgegA2s"></script>
+    <script src="js/leaflet/leaflet.js"></script>
     <script src="js/map-active.js"></script>
 
     <script>

@@ -57,8 +57,6 @@ function obtenerInfoProducto(idProducto) {
                     console.log(datos['cantImagenes']);
                     for (let i = 1; i <= datos['cantImagenes']; i++) {
                         var extensionImagen = "jpg";
-                        if(datos['marca'] == "Huawei" || datos['marca'] == "Omega")
-                            extensionImagen = "png";
                         carrusel += "<img src=\"img/product-img/" + datos['nombreImagen'] + "-" + i + "-B." + extensionImagen + "\" alt=\"\">";
                         //$("#imgCarrusel").trigger('add.owl.carousel', [carrusel]).trigger('refresh.owl.carousel');
                     }

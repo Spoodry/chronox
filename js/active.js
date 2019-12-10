@@ -167,3 +167,9 @@ $("#instagram").click(function() {
 
     window.open(url, "_blank");
 });
+
+$("#youtube").click(function() {
+    var url = "https://www.youtube.com/channel/UCkD4Z8jxx3Wj7JSYMR53LEg";
+
+    window.open(url, "_blank");
+});

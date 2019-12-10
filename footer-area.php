@@ -12,7 +12,7 @@
                     <div class="footer_menu">
                         <ul>
                             <li><a href="shop.php">Shop</a></li>
-                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="faq.php">FAQ</a></li>
                             <li><a href="contact.php">Contact</a></li>
                         </ul>
                     </div>
@@ -55,6 +55,7 @@
                         <a data-toggle="tooltip" data-placement="top" id="facebook" title="Facebook" style="cursor: pointer;"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                         <a data-toggle="tooltip" data-placement="top" id="twitter" title="Twitter" style="cursor: pointer;"><i class="fa fa-twitter" aria-hidden="true"></i></a>
                         <a data-toggle="tooltip" data-placement="top" id="instagram" title="Instagram" style="cursor: pointer;"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        <a data-toggle="tooltip" data-placement="top" id="youtube" title="Youtube" style="cursor: pointer;"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>
