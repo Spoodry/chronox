@@ -1,47 +1,55 @@
 <?php
     include('conexion.php');
 
-    if(isset($_GET['serie']))
+    if(isset($_POST['serie']))
     {
-        $serie = $_GET['serie'];
+        $serie = $_POST['serie'];
     }
-    if(isset($_GET['marca']))
+    if(isset($_POST['marca']))
     {
-        $marca = $_GET['marca'];
+        $marca = $_POST['marca'];
     }
-    if(isset($_GET['modelo']))
+    if(isset($_POST['modelo']))
     {
-        $modelo = $_GET['modelo'];
+        $modelo = $_POST['modelo'];
     }
-    if(isset($_GET['tipo']))
+    if(isset($_POST['tipo']))
     {
-        $tipo = $_GET['tipo'];
+        $tipo = $_POST['tipo'];
     }
-    if(isset($_GET['asignacion']))
+    if(isset($_POST['asignacion']))
     {
-        $asignacion = $_GET['asignacion'];
+        $asignacion = $_POST['asignacion'];
     }
-    if(isset($_GET['economico']))
+    if(isset($_POST['economico']))
     {
-        $economico = $_GET['economico'];
+        $economico = $_POST['economico'];
+    }
+
+    if(isset($_FILES['imagen'])) {
+        $dirSubida = '/home/chronoxme/public_html/almacen/imagenes/';
+        $fileSubido = $dirSubida . basename($_FILES['imagen']['name']);
+        if (move_uploaded_file($_FILES['imagen']['tmp_name'], $fileSubido)) {
+            $imagen = $_FILES['imagen']['name'];
+        }
     }
 
     $database = Conectar();
-    $stmt = $database->prepare("insert into equipo(Serie,Marca,Modelo,Tipo,Asignacion,Economico) values(?,?,?,?,?,?)");
-    $stmt->bind_param("ssssss",$serie,$marca,$modelo,$tipo,$asignacion,$economico);
+    $stmt = $database->prepare("insert into equipo(Serie,Marca,Modelo,Tipo,Asignacion,Economico,Imagen) values(?,?,?,?,?,?,?)");
+    $stmt->bind_param("sssssss",$serie,$marca,$modelo,$tipo,$asignacion,$economico,$imagen);
     $stmt->execute();
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
 <body>
-    <form>
+    <form method="POST" enctype="multipart/form-data">
         serie:<br>
         <input type = "text" name = "serie"><br><br>
         marca:<br>
@@ -76,6 +84,7 @@
         <input type = "text" name = "asignacion"><br><br>
         economico:<br>
         <input type = "text" name = "economico"><br><br>
+        <input type="file" name="imagen"><br><br>
         <input type = "submit">
     </form>
 </body>

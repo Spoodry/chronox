@@ -19,7 +19,7 @@
             break;
     }
 
-    $stmt = $link->prepare("SELECT Serie, Marca, Modelo, te.NomEquipo AS Tipo, Asignacion, Economico FROM equipo AS e INNER JOIN tipoequipo AS te ON e.Tipo = te.IdTipo WHERE Modelo LIKE ?");
+    $stmt = $link->prepare("SELECT e.Serie, e.Marca, e.Modelo, te.NomEquipo AS Tipo, e.Asignacion, e.Economico FROM equipo AS e INNER JOIN tipoequipo AS te ON e.Tipo = te.IdTipo WHERE Modelo LIKE ?");
     $stmt->bind_param("s", $cadenaBusqueda);
 
     if($stmt->execute()) {
