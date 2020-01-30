@@ -1,10 +1,10 @@
 function buscar() {
     console.log("cadena=" + $("#txtCadena") + "&tipo=" + $("input[name=rdTipo]:checked").val());
     $.ajax({
-        data: "cadena=" + $("#txtCadena").val() + "&tipo=" + $("input[name=rdTipo]:checked").val(),
+        data: "opc=busqueda&cadena=" + $("#txtCadena").val() + "&tipo=" + $("input[name=rdTipo]:checked").val(),
         type: "GET",
         dataType: "json",
-        url: "busqueda.php",
+        url: "files/nucleo.php",
         success: function(data) {
             if(data.err == 1) {
                 console.log(data.err);
