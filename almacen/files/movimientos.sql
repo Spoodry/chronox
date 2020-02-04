@@ -68,11 +68,10 @@ ALTER TABLE usuarios
 ALTER TABLE usuarios
     ADD clave VARCHAR(32) NOT NULL;
 
-CREATE PROCEDURE login (
+CREATE PROCEDURE proc_login (
     p_usuario VARCHAR(64), 
-    p_clave VARCHAR(32))
-BEGIN
-SELECT id, idUsuario, nomUsuario FROM usuarios WHERE usuario = usuario AND clave = clave;
-END
+    p_clave VARCHAR(32)
+)
+SELECT id, idUsuario, nomUsuario FROM usuarios WHERE usuario = p_usuario AND clave = (SELECT MD5(p_clave));
 
 UPDATE usuarios SET clave = (SELECT MD5('juan123')) WHERE usuario = 'JuanPablo85'
