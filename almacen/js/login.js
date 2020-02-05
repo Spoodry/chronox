@@ -6,7 +6,7 @@ function iniciarSesion() {
         url: "files/nucleo.php",
         success: function(data) {
             if(data.err == 0) {
-                alert("Correcto");
+                window.location = 'index.php';
             } else {
                 alert("Incorrecto");
             }
@@ -16,3 +16,15 @@ function iniciarSesion() {
         }
     });
 }
+
+$("#txtUsuario").keypress(function(e) {
+    if(e.which == 13) {
+        iniciarSesion();
+    }
+});
+
+$("#txtClave").keypress(function(e) {
+    if(e.which == 13) {
+        iniciarSesion();
+    }
+});

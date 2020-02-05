@@ -75,3 +75,5 @@ CREATE PROCEDURE proc_login (
 SELECT id, idUsuario, nomUsuario FROM usuarios WHERE usuario = p_usuario AND clave = (SELECT MD5(p_clave));
 
 UPDATE usuarios SET clave = (SELECT MD5('juan123')) WHERE usuario = 'JuanPablo85'
+
+UPDATE usuarios SET clave = (select MD5('Vegetta777')), usuario = 'Exxomylie' where id = 15; +

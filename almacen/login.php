@@ -21,8 +21,8 @@
             <div class="card-body">
                 <h1 class="text-center font-weight-light text-secondary">Iniciar Sesión</h1>
                 <form id="formLogin" autocomplete="off">
-                    <input type="text" class="form-control mb-3" name="usuario" placeholder="Usuario">
-                    <input type="password" class="form-control mb-3" name="clave" placeholder="Contraseña">
+                    <input type="text" class="form-control mb-3" id="txtUsuario" name="usuario" placeholder="Usuario">
+                    <input type="password" class="form-control mb-3" id="txtClave" name="clave" placeholder="Contraseña">
                 </form>
                 <div class="text-center">
                     <button class="btn btn-success" onclick="iniciarSesion()">Ingresar</button>
