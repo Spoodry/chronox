@@ -1,10 +1,26 @@
 <?php
     include 'files/conexion.php';
     $link = Conectar();
-    $stmt = $link->prepare('SELECT * FROM usuarios');
+
+    $stmt = $link->prepare("SELECT * FROM equipos");
 
     if($stmt->execute()) {
         $rows = mysqli_fetch_all($stmt->get_result(), MYSQLI_ASSOC);
+    }
+
+    $stmt->close();
+
+    $idEquipo = $_GET['idEquipo'];
+
+    $estatus = 0;
+
+    $stmt = $link->prepare("UPDATE equipos SET estatus = ? WHERE id = ?;");
+    $stmt->bind_param("ii", $estatus, $idEquipo);
+
+    if($stmt->execute()) {
+        $stmt->close();
+
+        echo "<a href=\"entrada-inventario.php?idEquipo=$idEquipo\" target=\"_blank\">PDF Salida</a>";
     }
 
 ?>
@@ -14,7 +30,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
     <title>Document</title>
 
     <link rel="stylesheet" href="../css/core-style.css">
@@ -23,23 +38,27 @@
 <body>
     <?php
         include('topbar.php');
-    ?>
+    ?>    
+
     <div class="container">
-        <form method="GET" action="plantilla.php">
+        <form method="GET" action="">
             <div class="form-group">
-                <label>Asignación</label>
-                <select class="form-control" name="asignacion">
+                <label>Equipos</label>
+                <select class="form-control" name="idEquipo">
                 <?php
                     for($i = 0; $i < count($rows); $i++) {
-                        $id = $rows[$i]['idUsuario'];
-                        $nombre = $rows[$i]['nomUsuario'];
-                        echo "<option value='$id'>$nombre</option>";
+                        $id = $rows[$i]['id'];
+                        $Serie = $rows[$i]['Serie'];   
+                        $Marca = $rows[$i]['Marca'];
+                        $Modelo = $rows[$i]['Modelo'];
+
+                        echo "<option value='$id'>$Serie $Marca $Modelo</option>";
                     }
                 ?>
                 </select>
             </div>
             <div class="text-center">
-                <input type="submit" class="btn btn-success" value="Generar PDF">
+                <input type="submit" class="btn btn-success" value="Dar de Baja">
             </div>
         </form>
     </div>
@@ -54,12 +73,5 @@
     <script src="../js/plugins.js"></script>
     <!-- Classy Nav js -->
     <script src="../js/classy-nav.min.js"></script>
-
-    <script src="js/funciones.js"></script>
-
-    <script>
-        activar('nvItemInform');
-    </script>
-
 </body>
 </html>

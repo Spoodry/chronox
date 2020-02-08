@@ -26,3 +26,7 @@ function buscar() {
         }
     });
 }
+
+function activar(navItem) {
+    $("#" + navItem).addClass("active");
+}

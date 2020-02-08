@@ -76,4 +76,6 @@ SELECT id, idUsuario, nomUsuario FROM usuarios WHERE usuario = p_usuario AND cla
 
 UPDATE usuarios SET clave = (SELECT MD5('juan123')) WHERE usuario = 'JuanPablo85'
 
-UPDATE usuarios SET clave = (select MD5('Vegetta777')), usuario = 'Exxomylie' where id = 15; +
+UPDATE usuarios SET clave = (select MD5('Vegetta777')), usuario = 'Exxomylie' where id = 15;
+
+---Cambiar el nombre de tabla equipo a equipos

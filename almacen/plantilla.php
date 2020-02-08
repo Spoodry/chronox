@@ -1,11 +1,11 @@
 <?php
 
-include 'conexion.php';
+include 'files/conexion.php';
 $asignacion=$_GET['asignacion'];
 
 $link = Conectar();
 
-$stmt = $link->prepare('SELECT * FROM equipo WHERE Asignacion=?');
+$stmt = $link->prepare('SELECT * FROM equipos WHERE Asignacion=?');
 $stmt->bind_param("s", $asignacion);
 
 if($stmt->execute()) {

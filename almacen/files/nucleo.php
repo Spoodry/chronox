@@ -12,7 +12,7 @@
     else if(isset($_POST['opc']))
         $opcion = $_POST['opc'];
 
-    if(!(isset($_SESSION['lgIdUsuario'])) || $_SESSION['lgIdUsuario'] == '') {
+    if(!(isset($_SESSION['IdUsuario'])) || $_SESSION['IdUsuario'] == -1) {
         switch($opcion) {
             case 'login':
                 $_SESSION['IdUsuario'] = -1;
@@ -63,7 +63,7 @@
                         break;
                 }
             
-                $stmt = $link->prepare("SELECT e.Serie, e.Marca, e.Modelo, te.NomEquipo AS Tipo, e.Asignacion, e.Economico FROM equipo AS e INNER JOIN tipoequipo AS te ON e.Tipo = te.IdTipo WHERE Modelo LIKE ?");
+                $stmt = $link->prepare("SELECT e.Serie, e.Marca, e.Modelo, te.NomEquipo AS Tipo, e.Asignacion, e.Economico FROM equipos AS e INNER JOIN tipoequipo AS te ON e.Tipo = te.IdTipo WHERE Modelo LIKE ?");
                 $stmt->bind_param("s", $cadenaBusqueda);
             
                 if($stmt->execute()) {
