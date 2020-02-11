@@ -10,17 +10,21 @@
 
     $stmt->close();
 
-    $idEquipo = $_GET['idEquipo'];
+    if(isset($_GET['idEquipo'])) {
+        $idEquipo = $_GET['idEquipo'];
 
-    $estatus = 0;
+        $estatus = 0;
 
-    $stmt = $link->prepare("UPDATE equipos SET estatus = ? WHERE id = ?;");
-    $stmt->bind_param("ii", $estatus, $idEquipo);
+        $stmt = $link->prepare("CALL proc_eliminarEquipo(?)");
+        $stmt->bind_param("i", $idEquipo);
 
-    if($stmt->execute()) {
-        $stmt->close();
+        if($stmt->execute()) {
+            $stmt->close();
 
-        echo "<a href=\"entrada-inventario.php?idEquipo=$idEquipo\" target=\"_blank\">PDF Salida</a>";
+            echo "<a href=\"entrada-inventario.php?idEquipo=$idEquipo\" target=\"_blank\">PDF Salida</a>";
+        } else {
+            echo $link->error;
+        }
     }
 
 ?>
@@ -58,7 +62,7 @@
                 </select>
             </div>
             <div class="text-center">
-                <input type="submit" class="btn btn-success" value="Dar de Baja">
+                <input type="submit" class="btn btn-danger" value="Dar de Baja">
             </div>
         </form>
     </div>
@@ -73,5 +77,11 @@
     <script src="../js/plugins.js"></script>
     <!-- Classy Nav js -->
     <script src="../js/classy-nav.min.js"></script>
+
+    <script src="js/funciones.js"></script>
+    
+    <script>
+        activar('nvItemBajaEq');
+    </script>
 </body>
 </html>

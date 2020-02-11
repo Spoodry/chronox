@@ -39,7 +39,7 @@
                 </select>
             </div>
             <div class="text-center">
-                <input type="submit" class="btn btn-success" value="Generar PDF">
+                <input type="submit" class="btn btn-primary" value="Generar PDF">
             </div>
         </form>
     </div>

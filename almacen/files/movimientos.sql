@@ -6,14 +6,14 @@ CREATE TABLE movimientosEquipos(
 );
 
 DELIMITER $$
-CREATE TRIGGER movInsertEquipo AFTER INSERT ON equipo FOR EACH ROW BEGIN
+CREATE TRIGGER movInsertEquipo AFTER INSERT ON equipos FOR EACH ROW BEGIN
     SET @fecha = (SELECT NOW());
     INSERT INTO movimientosEquipos(fecha, idEquipo, idTipoMovimiento, Serie) VALUES(@fecha, NEW.id, 1, NEW.Serie);
 END $$
 DELIMITER ;
 
 DELIMITER $$
-CREATE TRIGGER movDeleteEquipo BEFORE DELETE ON equipo FOR EACH ROW BEGIN
+CREATE TRIGGER movDeleteEquipo BEFORE DELETE ON equipos FOR EACH ROW BEGIN
     SET @fecha = (SELECT NOW());
     INSERT INTO movimientosEquipos(fecha, idEquipo, idTipoMovimiento, Serie) values(@fecha, OLD.id, 2, OLD.Serie);
 END $$
@@ -37,22 +37,22 @@ ALTER TABLE equipo
     ADD estatus SMALLINT NOT NULL DEFAULT 1;
 
 DELIMITER $$
-CREATE PROCEDURE eliminarEquipo(
+CREATE PROCEDURE proc_eliminarEquipo(
     p_id INT
 )
 BEGIN
-    UPDATE equipo SET estatus = 0, Asignacion = "P000" WHERE id = p_id;
+    UPDATE equipos SET estatus = 0, Asignacion = "P000" WHERE id = p_id;
     SET @fecha = (SELECT NOW());
-    SET @serie = (SELECT Serie FROM equipo WHERE id = p_id);
+    SET @serie = (SELECT Serie FROM equipos WHERE id = p_id);
     INSERT INTO movimientosEquipos(fecha, idEquipo, idTipoMovimiento, Serie) VALUES(@fecha, p_id, 2, @serie);
 END $$
 DELIMITER ;
 
 DELIMITER $$
-CREATE TRIGGER movUpdateEquipo AFTER UPDATE ON equipo
+CREATE TRIGGER movUpdateEquipo AFTER UPDATE ON equipos
  FOR EACH ROW BEGIN
     SET @fecha = (SELECT NOW());
-    SET @estatus = (SELECT estatus FROM equipo WHERE id = OLD.id);
+    SET @estatus = (SELECT estatus FROM equipos WHERE id = OLD.id);
     IF @estatus = 1 THEN
         INSERT INTO movimientosEquipos(fecha, idEquipo, idTipoMovimiento, Serie) values(@fecha, OLD.id, 3, OLD.Serie);
     END IF;
