@@ -68,14 +68,14 @@
     ?>
     <div class="container">
         <form method="POST" enctype="multipart/form-data">
-            serie:<br>
-            <input type = "text" name = "serie"><br><br>
-            marca:<br>
-            <input type = "text" name = "marca"><br><br>
-            modelo:<br>
-            <input type = "text" name = "modelo"><br><br>
-            tipo:<br>
-            <select name = "tipo">
+            <label class="h6 font-weight-light">Serie</label>
+            <input type = "text" class="form-control mb-2" name = "serie">
+            <label class="h6 font-weight-light">Marca</label>
+            <input type = "text" class="form-control mb-2" name = "marca">
+            <label class="h6 font-weight-light">Modelo</label>
+            <input type = "text" class="form-control mb-2" name = "modelo">
+            <label class="h6 font-weight-light">Tipo</label>
+            <select name = "tipo" class="form-control mb-2">
                 <option></option>
                 <option value="0001">Escritorio</option>
                 <option value="0002">Laptop</option>
@@ -97,13 +97,16 @@
                 <option value="0019">SmartWatch</option>
                 <option value="0020">Smart Tv</option>
                 <option value="0021">Consola de Videojuegos</option>
-            </select><br><br>
-            asignacion:<br>
-            <input type = "text" name = "asignacion"><br><br>
-            economico:<br>
-            <input type = "text" name = "economico"><br><br>
-            <input type="file" name="imagen"><br><br>
-            <input type = "submit">
+            </select>
+            <label class="h6 font-weight-light">Asignación</label>
+            <input type = "text" class="form-control mb-2" name = "asignacion">
+            <label class="h6 font-weight-light">Económico</label>
+            <input type = "text" class="form-control mb-2" name = "economico">
+            <label class="h6 font-weight-light">Imagen</label>
+            <input type="file" class="form-control-file mb-2" name="imagen">
+            <div class="text-center">
+                <input type = "submit" class="btn btn-primary">
+            </div>
         </form>
     </div>
 
