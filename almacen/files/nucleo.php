@@ -78,6 +78,26 @@
     
                 $stmt->close();
                 break;
+            case 'obtenerTiposEquipos':
+                $stmt = $link->prepare('SELECT * FROM tipoequipo');
+
+                if($stmt->execute()) {
+                    $rows = mysqli_fetch_all($stmt->get_result(), MYSQLI_ASSOC);
+
+                    for($i = 0; $i < count($rows); $i++) {
+                        $rows[$i]['NomEquipo'] = utf8_encode($rows[$i]['NomEquipo']);
+                    }
+                    $salida['res'] = $rows;
+                } else {
+                    $err = 1;
+                }
+
+                $salida['err'] = $err;
+
+                echo json_encode($salida);
+
+                $stmt->close();
+                break;
         }
     }
 

@@ -75,28 +75,7 @@
             <label class="h6 font-weight-light">Modelo</label>
             <input type = "text" class="form-control mb-2" name = "modelo">
             <label class="h6 font-weight-light">Tipo</label>
-            <select name = "tipo" class="form-control mb-2">
-                <option></option>
-                <option value="0001">Escritorio</option>
-                <option value="0002">Laptop</option>
-                <option value="0003">Portatil</option>
-                <option value="0004">Fax</option>
-                <option value="0005">Telefono</option>
-                <option value="0006">Impresora</option>
-                <option value="0007">Escaner</option>
-                <option value="0008">Microfono</option>
-                <option value="0009">Bocina</option>
-                <option value="0010">Tablet</option>
-                <option value="0011">Punto de Acceso</option>
-                <option value="0012">Router</option>
-                <option value="0013">Switch</option>
-                <option value="0015">Camara</option>
-                <option value="0016">Modem</option>
-                <option value="0017">Smartphone</option>
-                <option value="0018">Radio</option>
-                <option value="0019">SmartWatch</option>
-                <option value="0020">Smart Tv</option>
-                <option value="0021">Consola de Videojuegos</option>
+            <select name = "tipo" id="slTipoEquipo" class="form-control mb-2">
             </select>
             <label class="h6 font-weight-light">Asignación</label>
             <input type = "text" class="form-control mb-2" name = "asignacion">
