@@ -53,11 +53,13 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Alta Equipo | Almacen</title>
+
+    <link rel="icon" href="../img/core-img/favicon.ico">
 
     <link rel="stylesheet" href="../css/core-style.css">
     <link rel="stylesheet" href="../style.css">
@@ -78,12 +80,13 @@
             <select name = "tipo" id="slTipoEquipo" class="form-control mb-2">
             </select>
             <label class="h6 font-weight-light">Asignación</label>
-            <input type = "text" class="form-control mb-2" name = "asignacion">
+            <select name="asignacion" id="slAsign" class="form-control mb-2">
+            </select>
             <label class="h6 font-weight-light">Económico</label>
             <input type = "text" class="form-control mb-2" name = "economico">
             <label class="h6 font-weight-light">Imagen</label>
             <input type="file" class="form-control-file mb-2" name="imagen">
-            <div class="text-center">
+            <div class="text-center mb-5">
                 <input type = "submit" class="btn btn-primary">
             </div>
         </form>
@@ -101,9 +104,14 @@
     <script src="../js/classy-nav.min.js"></script>
 
     <script src="js/funciones.js"></script>
+    
+    <script src="js/recibir-datos.js"></script>
 
     <script>
         activar('nvItemFormEq');
+
+        obtenerTiposEquipo();
+        obtenerUsuariosAsignacion();
     </script>
 
 </body>

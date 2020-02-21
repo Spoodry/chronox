@@ -79,3 +79,22 @@ UPDATE usuarios SET clave = (SELECT MD5('juan123')) WHERE usuario = 'JuanPablo85
 UPDATE usuarios SET clave = (select MD5('Vegetta777')), usuario = 'Exxomylie' where id = 15;
 
 ---Cambiar el nombre de tabla equipo a equipos
+
+ALTER TABLE movimientosEquipos
+    ADD query VARCHAR(512);
+
+DELIMITER $$
+CREATE PROCEDURE proc_altaEquipo(
+    p_Serie VARCHAR(10),
+    p_Marca VARCHAR(30),
+    p_Modelo VARCHAR(30),
+    p_Tipo VARCHAR(30),
+    p_Asignacion VARCHAR(4),
+    p_Economico VARCHAR(7),
+    p_Imagen VARCHAR(255)
+)
+BEGIN
+    INSERT INTO equipos(Serie,Marca,Modelo,Tipo,Asignacion,Economico,Imagen) VALUES(p_Serie, p_Marca, p_Modelo, p_Tipo, p_Asignacion, p_Economico, p_Imagen);
+    INSERT INTO movimientosEquipos()
+END $$
+DELIMITER ;

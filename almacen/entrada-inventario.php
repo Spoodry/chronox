@@ -58,7 +58,7 @@
     
     $html = <<<HTML
         $tabla
-    HTML;
+HTML;
     $pdf->writeHTML($html, true, 0, true, 0);
     //$pdf->Output($nombre, 'I');
     // ---------------------------------------------------------
