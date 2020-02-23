@@ -2,31 +2,13 @@
     include 'files/conexion.php';
     $link = Conectar();
 
-    $stmt = $link->prepare("SELECT * FROM equipos");
+    $stmt = $link->prepare("SELECT * FROM equipos WHERE estatus = 1");
 
     if($stmt->execute()) {
         $rows = mysqli_fetch_all($stmt->get_result(), MYSQLI_ASSOC);
     }
 
     $stmt->close();
-
-    if(isset($_GET['idEquipo'])) {
-        $idEquipo = $_GET['idEquipo'];
-
-        $estatus = 0;
-
-        $stmt = $link->prepare("CALL proc_eliminarEquipo(?)");
-        $stmt->bind_param("i", $idEquipo);
-
-        if($stmt->execute()) {
-            $stmt->close();
-
-            echo "<a href=\"entrada-inventario.php?idEquipo=$idEquipo\" target=\"_blank\">PDF Salida</a>";
-        } else {
-            echo $link->error;
-        }
-    }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,11 +29,12 @@
     ?>    
 
     <div class="container">
-        <form method="GET" action="">
+        <form method="GET" id="formBajaEquipo">
             <div class="form-group">
                 <label>Equipos</label>
                 <select class="form-control" name="idEquipo">
                 <?php
+                    echo "<option value='-1'></option>";
                     for($i = 0; $i < count($rows); $i++) {
                         $id = $rows[$i]['id'];
                         $Serie = $rows[$i]['Serie'];   
@@ -63,10 +46,10 @@
                 ?>
                 </select>
             </div>
-            <div class="text-center">
-                <input type="submit" class="btn btn-danger" value="Dar de Baja">
-            </div>
         </form>
+        <div class="text-center">
+            <input type="submit" class="btn btn-danger" value="Dar de Baja" onclick="bajaEquipo()">
+        </div>
     </div>
 
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
@@ -79,8 +62,11 @@
     <script src="../js/plugins.js"></script>
     <!-- Classy Nav js -->
     <script src="../js/classy-nav.min.js"></script>
+    <script src="https://kit.fontawesome.com/34336e5f41.js" crossorigin="anonymous"></script>
 
     <script src="js/funciones.js"></script>
+
+    <script src="js/envio-datos.js"></script>
     
     <script>
         activar('nvItemBajaEq');

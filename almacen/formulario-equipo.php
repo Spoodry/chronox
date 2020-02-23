@@ -1,56 +1,3 @@
-<?php
-    include('files/conexion.php');
-
-    if(isset($_POST['serie']))
-    {
-        $serie = $_POST['serie'];
-    }
-    if(isset($_POST['marca']))
-    {
-        $marca = $_POST['marca'];
-    }
-    if(isset($_POST['modelo']))
-    {
-        $modelo = $_POST['modelo'];
-    }
-    if(isset($_POST['tipo']))
-    {
-        $tipo = $_POST['tipo'];
-    }
-    if(isset($_POST['asignacion']))
-    {
-        $asignacion = $_POST['asignacion'];
-    }
-    if(isset($_POST['economico']))
-    {
-        $economico = $_POST['economico'];
-    }
-
-    if(isset($_FILES['imagen'])) {
-        $dirSubida = 'imagenes/';
-        $fileSubido = $dirSubida . basename($_FILES['imagen']['name']);
-        if (move_uploaded_file($_FILES['imagen']['tmp_name'], $fileSubido)) {
-            $imagen = $_FILES['imagen']['name'];
-        }
-    }
-
-    $database = Conectar();
-    $stmt = $database->prepare("insert into equipos(Serie,Marca,Modelo,Tipo,Asignacion,Economico,Imagen) values(?,?,?,?,?,?,?)");
-    $stmt->bind_param("sssssss",$serie,$marca,$modelo,$tipo,$asignacion,$economico,$imagen);
-    if($stmt->execute()) {
-        $stmt->close();
-        $stmt = $database->prepare("SELECT id FROM equipos ORDER BY id DESC LIMIT 1;");
-        $stmt->execute();
-        $row = mysqli_fetch_array($stmt->get_result(), MYSQLI_ASSOC);
-
-        $stmt->close();
-
-        $idEquipo = $row['id'];
-
-        echo "<a href=\"entrada-inventario.php?idEquipo=$idEquipo\" target=\"_blank\">PDF Entrada</a>";
-    }
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,7 +16,8 @@
         include('topbar.php');
     ?>
     <div class="container">
-        <form method="POST" enctype="multipart/form-data">
+        <form method="POST" enctype="multipart/form-data" id="formAltaEquipo">
+            <input type="hidden" name="opc" value="altaEquipo">
             <label class="h6 font-weight-light">Serie</label>
             <input type = "text" class="form-control mb-2" name = "serie">
             <label class="h6 font-weight-light">Marca</label>
@@ -85,9 +33,9 @@
             <label class="h6 font-weight-light">Económico</label>
             <input type = "text" class="form-control mb-2" name = "economico">
             <label class="h6 font-weight-light">Imagen</label>
-            <input type="file" class="form-control-file mb-2" name="imagen">
+            <input type="file" class="form-control-file mb-4" name="imagen">
             <div class="text-center mb-5">
-                <input type = "submit" class="btn btn-primary">
+                <input type="submit" class="btn btn-primary">
             </div>
         </form>
     </div>
@@ -102,10 +50,13 @@
     <script src="../js/plugins.js"></script>
     <!-- Classy Nav js -->
     <script src="../js/classy-nav.min.js"></script>
+    <script src="https://kit.fontawesome.com/34336e5f41.js" crossorigin="anonymous"></script>
 
     <script src="js/funciones.js"></script>
     
     <script src="js/recibir-datos.js"></script>
+
+    <script src="js/envio-datos.js"></script>
 
     <script>
         activar('nvItemFormEq');

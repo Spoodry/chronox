@@ -31,6 +31,7 @@
                 <label>Asignación</label>
                 <select class="form-control" name="asignacion">
                 <?php
+                    echo "<option value='-1'></option>";
                     for($i = 0; $i < count($rows); $i++) {
                         $id = $rows[$i]['idUsuario'];
                         $nombre = utf8_encode($rows[$i]['nomUsuario']);
@@ -55,6 +56,7 @@
     <script src="../js/plugins.js"></script>
     <!-- Classy Nav js -->
     <script src="../js/classy-nav.min.js"></script>
+    <script src="https://kit.fontawesome.com/34336e5f41.js" crossorigin="anonymous"></script>
 
     <script src="js/funciones.js"></script>
 

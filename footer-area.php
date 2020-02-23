@@ -14,6 +14,7 @@
                             <li><a href="shop.php">Shop</a></li>
                             <li><a href="faq.php">FAQ</a></li>
                             <li><a href="contact.php">Contact</a></li>
+                            <li><a href="almacen/">Almacén</a></li>
                         </ul>
                     </div>
                 </div>

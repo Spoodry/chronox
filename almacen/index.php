@@ -29,27 +29,32 @@
             include('topbar.php');
         ?>
         <div class="container">
-            <div class="form-group">
-                <input type="text" class="form-control" id="txtCadena">
-            </div>
-            <div class="form-group d-flex justify-content-around">
-                <div>
-                    <input type="radio" name="rdTipo" id="rdInicio" value="Principio" checked>
-                    <label class="font-weight-normal h5" for="rdInicio">Principio</label>
+            <h1 class="h2 font-weight-light mb-4">Inventario</h1>
+            <div class="form-group row">
+                <div class="col-xl-7 col-7">
+                    <input type="text" class="form-control" id="txtCadena">
                 </div>
-                <div>
-                    <input type="radio" name="rdTipo" id="rdMedio" value="Medio">
-                    <label class="font-weight-normal h5" for="rdMedio">Medio</label>
+                <div class="col-xl-3 col-5">
+                    <select class="form-control" id="rdTipo">
+                        <option value="Principio">Principio</option>
+                        <option value="Medio">Medio</option>
+                        <option value="Final">Final</option>
+                    </select>
                 </div>
-                <div>
-                    <input type="radio" name="rdTipo" id="rdFin" value="Final">
-                    <label class="font-weight-normal h5" for="rdFin">Final</label>
+                
+                <div class="col-xl-2 mt-xl-0 mt-3">
+                    <div class="text-xl-left text-center">
+                        <button class="btn btn-primary btn-icon-split" onclick="buscar()">
+                            <span class="icon text-white-50">
+                                <i class="fa fa-search"></i>
+                            </span>
+                            <span class="text">Buscar</span>
+                        </button>
+                    </div>
                 </div>
             </div>
-            <div class="form-group text-center">
-                <input type="submit" class="btn bg-success text-white" onclick="buscar()">
-            </div>
-            <div class="table-responsive d-none" id="tablaCompleta">
+            
+            <div class="table-responsive" id="tablaCompleta">
                 <table class="table" style="visibility: visible;">
                     <thead>
                         <tr>
@@ -62,9 +67,6 @@
                         </tr>
                     </thead>
                     <tbody id="tableContenido">
-                        <tr>
-                            <td>Marca</td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -82,11 +84,13 @@
     <script src="../js/plugins.js"></script>
     <!-- Classy Nav js -->
     <script src="../js/classy-nav.min.js"></script>
+    <script src="https://kit.fontawesome.com/34336e5f41.js" crossorigin="anonymous"></script>
 
     <script src="js/funciones.js"></script>
 
     <script>
         activar('nvItemInv');
+        buscar();
     </script>
 
 </body>

@@ -42,9 +42,6 @@ CREATE PROCEDURE proc_eliminarEquipo(
 )
 BEGIN
     UPDATE equipos SET estatus = 0, Asignacion = "P000" WHERE id = p_id;
-    SET @fecha = (SELECT NOW());
-    SET @serie = (SELECT Serie FROM equipos WHERE id = p_id);
-    INSERT INTO movimientosEquipos(fecha, idEquipo, idTipoMovimiento, Serie) VALUES(@fecha, p_id, 2, @serie);
 END $$
 DELIMITER ;
 
@@ -95,6 +92,19 @@ CREATE PROCEDURE proc_altaEquipo(
 )
 BEGIN
     INSERT INTO equipos(Serie,Marca,Modelo,Tipo,Asignacion,Economico,Imagen) VALUES(p_Serie, p_Marca, p_Modelo, p_Tipo, p_Asignacion, p_Economico, p_Imagen);
-    INSERT INTO movimientosEquipos()
+    SELECT id FROM equipos ORDER BY id DESC LIMIT 1;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE proc_nuevoMovimientoEquipo(
+    p_idEquipo INT, 
+    p_idTipoMovimiento INT,
+    p_query VARCHAR(512)
+)
+BEGIN
+    SET @fecha = (SELECT NOW());
+    SET @serie = (SELECT Serie FROM equipos WHERE id = p_idEquipo);
+    INSERT INTO movimientosEquipos(fecha, idEquipo, idTipoMovimiento, Serie, query) VALUES(@fecha, p_idEquipo, p_idTipoMovimiento, @serie, p_query);
 END $$
 DELIMITER ;

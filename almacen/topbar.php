@@ -1,4 +1,4 @@
-<nav class="navbar fixed-top navbar-expand-md mb-4 navbar-dark bg-danger">
+<nav class="navbar fixed-top navbar-expand-md mb-4 navbar-dark bg-dark">
     <a class="navbar-brand font-weight-light text-white" style="cursor: default;">Almacen</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -20,7 +20,7 @@
             </li>
         </ul>
         <div class="form-inline my-2 my-lg-0">
-            <button class="btn btn-outline-light my-2 my-sm-0" onclick="window.location='login.php';">Cerrar Sesión</button>
+            <button class="btn btn-outline-danger my-2 my-sm-0" onclick="window.location='login.php';"><i class="fa fa-sign-out-alt"></i></button>
         </div>
     </div>
 </nav>

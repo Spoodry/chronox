@@ -1,7 +1,7 @@
 function buscar() {
-    console.log("cadena=" + $("#txtCadena") + "&tipo=" + $("input[name=rdTipo]:checked").val());
+    console.log("cadena=" + $("#txtCadena") + "&tipo=" + $("#rdTipo").val());
     $.ajax({
-        data: "opc=busqueda&cadena=" + $("#txtCadena").val() + "&tipo=" + $("input[name=rdTipo]:checked").val(),
+        data: "opc=busqueda&cadena=" + $("#txtCadena").val() + "&tipo=" + $("#rdTipo").val(),
         type: "GET",
         dataType: "json",
         url: "files/nucleo.php",

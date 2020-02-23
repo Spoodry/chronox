@@ -12,20 +12,26 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login | Spood</title>
 
+    <link rel="icon" href="../img/core-img/favicon.ico">
+
     <link rel="stylesheet" href="../css/core-style.css">
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    <div class="container w-50">
-        <div class="card">
-            <div class="card-body">
-                <h1 class="text-center font-weight-light text-secondary">Iniciar Sesión</h1>
-                <form id="formLogin" autocomplete="off">
-                    <input type="text" class="form-control mb-3" id="txtUsuario" name="usuario" placeholder="Usuario">
-                    <input type="password" class="form-control mb-3" id="txtClave" name="clave" placeholder="Contraseña">
-                </form>
-                <div class="text-center">
-                    <button class="btn btn-success" onclick="iniciarSesion()">Ingresar</button>
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-xl-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="text-center font-weight-light text-secondary">Iniciar Sesión</h1>
+                        <form id="formLogin" autocomplete="off">
+                            <input type="text" class="form-control mb-3" id="txtUsuario" name="usuario" placeholder="Usuario">
+                            <input type="password" class="form-control mb-3" id="txtClave" name="clave" placeholder="Contraseña">
+                        </form>
+                        <div class="text-center">
+                            <button class="btn btn-success" onclick="iniciarSesion()">Ingresar</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

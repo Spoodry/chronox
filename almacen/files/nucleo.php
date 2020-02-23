@@ -63,8 +63,8 @@
                         break;
                 }
             
-                $stmt = $link->prepare("SELECT e.Serie, e.Marca, e.Modelo, te.NomEquipo AS Tipo, e.Asignacion, e.Economico FROM equipos AS e INNER JOIN tipoequipo AS te ON e.Tipo = te.IdTipo WHERE Modelo LIKE ?");
-                $stmt->bind_param("s", $cadenaBusqueda);
+                $stmt = $link->prepare("SELECT e.Serie, e.Marca, e.Modelo, te.NomEquipo AS Tipo, u.nomUsuario AS Asignacion, e.Economico FROM equipos AS e INNER JOIN tipoequipo AS te ON e.Tipo = te.IdTipo INNER JOIN usuarios AS u ON e.Asignacion = u.idUsuario WHERE Modelo LIKE ? OR u.nomUsuario LIKE ?");
+                $stmt->bind_param("ss", $cadenaBusqueda, $cadenaBusqueda);
             
                 if($stmt->execute()) {
                     $rows = mysqli_fetch_all($stmt->get_result(), MYSQLI_ASSOC);
@@ -108,6 +108,81 @@
                         $rows[$i]['nomUsuario'] = utf8_encode($rows[$i]['nomUsuario']);
                     }
                     $salida['res'] = $rows;
+                } else {
+                    $err = 1;
+                }
+
+                $salida['err'] = $err;
+
+                echo json_encode($salida);
+
+                $stmt->close();
+                break;
+            case 'altaEquipo':
+                $serie = utf8_decode($_POST['serie']);
+                $marca = utf8_decode($_POST['marca']);
+                $modelo = utf8_decode($_POST['modelo']);
+                $tipo = utf8_decode($_POST['tipo']);
+                $asignacion = utf8_decode($_POST['asignacion']);
+                $economico = utf8_decode($_POST['economico']);
+                $imagen = '';
+
+                if(isset($_FILES['imagen'])) {
+                    $imagen = $_FILES['imagen']['name'];
+                }
+
+                $stmt = $link->prepare('CALL proc_altaEquipo(?,?,?,?,?,?,?);');
+                $query = "CALL proc_altaEquipo('$serie','$marca','$modelo','$tipo','$asignacion','$economico','$imagen');";
+                $stmt->bind_param('sssssss', $serie, $marca, $modelo, $tipo, $asignacion, $economico, $imagen);
+
+                if($stmt->execute()) {
+                    $row = mysqli_fetch_array($stmt->get_result(), MYSQLI_ASSOC);
+
+                    if(isset($_FILES['imagen'])) {
+                        $dir = '../imagenes/';
+                        $fileSubido = $dir . basename($_FILES['imagen']['name']);
+                        if(move_uploaded_file($_FILES['imagen']['tmp_name'], $fileSubido)) {
+                            $imagen = $_FILES['imagen']['name'];
+                        }
+                    }
+
+                    $idEquipo = $row['id'];
+                    $idTipoMovimiento = 1;
+
+                    $stmt->close();
+
+                    $stmt = $link->prepare('CALL proc_nuevoMovimientoEquipo(?,?,?);');
+                    $stmt->bind_param('iis', $idEquipo, $idTipoMovimiento, $query);
+
+                    $stmt->execute();
+
+                } else {
+                    $err = 1;
+                    echo $link->error;
+                }
+
+                $salida['err'] = $err;
+
+                echo json_encode($salida);
+
+                $stmt->close();
+                break;
+            case 'eliminarEquipo':
+                $idEquipo = $_GET['idEquipo'];
+
+                $stmt = $link->prepare("CALL proc_eliminarEquipo(?);");
+                $query = "CALL proc_eliminarEquipo($idEquipo);";
+                $stmt->bind_param("i", $idEquipo);
+
+                if($stmt->execute()) {
+                    $stmt->close();
+
+                    $idTipoMovimiento = 2;
+
+                    $stmt = $link->prepare('CALL proc_nuevoMovimientoEquipo(?,?,?);');
+                    $stmt->bind_param('iis', $idEquipo, $idTipoMovimiento, $query);
+
+                    $stmt->execute();
                 } else {
                     $err = 1;
                 }
