@@ -228,6 +228,56 @@
     
                 $stmt->close();
                 break;
+            case 'obtenerHistorial':
+                $idEquipo = $_GET['idEquipo'];
+
+                $stmt = $link->prepare('CALL proc_obtenerDatosEquipo(?);');
+                $stmt->bind_param('i', $idEquipo);
+
+                if($stmt->execute()) {
+                    $row = mysqli_fetch_array($stmt->get_result(), MYSQLI_ASSOC);
+                    
+                    $row['Serie'] = utf8_encode($row['Serie']);
+                    $row['Marca'] = utf8_encode($row['Marca']);
+                    $row['Modelo'] = utf8_encode($row['Modelo']);
+                    $row['Tipo'] = utf8_encode($row['Tipo']);
+                    $row['Asignacion'] = utf8_encode($row['Asignacion']);
+                    $row['Economico'] = utf8_encode($row['Economico']);
+                    $row['Imagen'] = utf8_encode($row['Imagen']);
+
+                    $salida['equipo'] = $row;
+
+                    $stmt->close();
+
+                    $stmt = $link->prepare('CALL proc_obtenerHistorial(?);');
+                    $stmt->bind_param('i', $idEquipo);
+
+                    if($stmt->execute()) {
+                        $rows = mysqli_fetch_all($stmt->get_result(), MYSQLI_ASSOC);
+
+                        for($i = 0; $i < count($rows); $i++) {
+                            $rows[$i]['nomUsuario'] = utf8_encode($rows[$i]['nomUsuario']);
+                            $rows[$i]['tipoMovimiento'] = utf8_encode($rows[$i]['tipoMovimiento']);
+                            $rows[$i]['Serie'] = utf8_encode($rows[$i]['Serie']);
+                        }
+
+                        $salida['movimientos'] = $rows;
+                    } else {
+                        $err = 1;
+                        echo $link->error;
+                    }
+
+                } else {
+                    $err = 1;
+                    echo $link->error;
+                }
+
+                $salida['err'] = $err;
+
+                echo json_encode($salida);
+
+                $stmt->close();
+                break;
         }
     }
 

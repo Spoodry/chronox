@@ -119,3 +119,10 @@ CREATE PROCEDURE proc_obtenerHistorial(
 SELECT me.id, me.idUsuario, u.nomUsuario, fecha, idEquipo, idTipoMovimiento, tm.nombre AS tipoMovimiento, Serie FROM movimientosEquipos AS me
 INNER JOIN tiposMovimientos AS tm ON me.idTipoMovimiento = tm.id 
 INNER JOIN usuarios AS u ON me.idUsuario = u.id WHERE idEquipo = p_idEquipo;
+
+CREATE PROCEDURE proc_obtenerDatosEquipo(
+    p_idEquipo INT
+)
+SELECT Serie, Marca, Modelo, te.NomEquipo AS Tipo, u.nomUsuario AS Asignacion, Economico, Imagen FROM equipos AS e
+INNER JOIN tipoequipo AS te ON e.Tipo = te.IdTipo
+LEFT JOIN usuarios AS u ON e.Asignacion = u.idUsuario WHERE e.id = p_idEquipo;
