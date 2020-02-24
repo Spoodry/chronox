@@ -1,4 +1,12 @@
 <?php
+    session_name('almacen');
+    session_start();
+    date_default_timezone_set('America/Monterrey');
+
+    if(!isset($_SESSION['IdUsuario']) || $_SESSION['IdUsuario'] == -1) {
+        header('location: login.php');
+    }
+    
     include 'files/conexion.php';
     $link = Conectar();
 

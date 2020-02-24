@@ -9,11 +9,14 @@
 
     include 'files/conexion.php';
     $link = Conectar();
-    $stmt = $link->prepare('SELECT * FROM usuarios');
+
+    $stmt = $link->prepare("SELECT * FROM equipos");
 
     if($stmt->execute()) {
         $rows = mysqli_fetch_all($stmt->get_result(), MYSQLI_ASSOC);
     }
+
+    $stmt->close();
 
 ?>
 <!DOCTYPE html>
@@ -21,11 +24,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Informe | Almacen</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Historial</title>
 
     <link rel="icon" href="../img/core-img/favicon.ico">
 
+    <!-- Core Style CSS -->
     <link rel="stylesheet" href="../css/core-style.css">
     <link rel="stylesheet" href="../style.css">
 </head>
@@ -33,25 +38,29 @@
     <?php
         include('topbar.php');
     ?>
-    <div class="container">
-        <form method="GET" action="plantilla.php">
+
+<div class="container">
+        <form method="GET" id="formBajaEquipo">
             <div class="form-group">
-                <label>Asignación</label>
-                <select class="form-control" name="asignacion">
+                <label>Equipos</label>
+                <select class="form-control" name="idEquipo">
                 <?php
                     echo "<option value='-1'></option>";
                     for($i = 0; $i < count($rows); $i++) {
-                        $id = $rows[$i]['idUsuario'];
-                        $nombre = utf8_encode($rows[$i]['nomUsuario']);
-                        echo "<option value='$id'>$nombre</option>";
+                        $id = $rows[$i]['id'];
+                        $Serie = $rows[$i]['Serie'];   
+                        $Marca = $rows[$i]['Marca'];
+                        $Modelo = $rows[$i]['Modelo'];
+
+                        echo "<option value='$id'>$Serie $Marca $Modelo</option>";
                     }
                 ?>
                 </select>
             </div>
-            <div class="text-center">
-                <input type="submit" class="btn btn-primary" value="Generar PDF">
-            </div>
         </form>
+        <div class="text-center">
+            <input type="submit" class="btn btn-primary" value="Aceptar" onclick="">
+        </div>
     </div>
 
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
@@ -69,8 +78,7 @@
     <script src="js/funciones.js"></script>
 
     <script>
-        activar('nvItemInform');
+        activar('nvItemHistorial');
     </script>
-
 </body>
 </html>

@@ -1,7 +1,11 @@
 function buscar() {
-    console.log("cadena=" + $("#txtCadena") + "&tipo=" + $("#rdTipo").val());
+    if($("#txtCadena").val() == '') {
+        data = 'opc=obtenerEquipos';
+    } else {
+        data = "opc=busqueda&cadena=" + $("#txtCadena").val() + "&tipo=" + $("#rdTipo").val();
+    }
     $.ajax({
-        data: "opc=busqueda&cadena=" + $("#txtCadena").val() + "&tipo=" + $("#rdTipo").val(),
+        data: data,
         type: "GET",
         dataType: "json",
         url: "files/nucleo.php",

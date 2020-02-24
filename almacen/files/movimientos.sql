@@ -98,6 +98,7 @@ DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE proc_nuevoMovimientoEquipo(
+    p_idUsuario INT,
     p_idEquipo INT, 
     p_idTipoMovimiento INT,
     p_query VARCHAR(512)
@@ -105,6 +106,16 @@ CREATE PROCEDURE proc_nuevoMovimientoEquipo(
 BEGIN
     SET @fecha = (SELECT NOW());
     SET @serie = (SELECT Serie FROM equipos WHERE id = p_idEquipo);
-    INSERT INTO movimientosEquipos(fecha, idEquipo, idTipoMovimiento, Serie, query) VALUES(@fecha, p_idEquipo, p_idTipoMovimiento, @serie, p_query);
+    INSERT INTO movimientosEquipos(idUsuario, fecha, idEquipo, idTipoMovimiento, Serie, query) VALUES(p_idUsuario, @fecha, p_idEquipo, p_idTipoMovimiento, @serie, p_query);
 END $$
 DELIMITER ;
+
+ALTER TABLE movimientosEquipos
+    ADD idUsuario INT NOT NULL AFTER id;
+
+CREATE PROCEDURE proc_obtenerHistorial(
+    p_idEquipo INT
+)
+SELECT me.id, me.idUsuario, u.nomUsuario, fecha, idEquipo, idTipoMovimiento, tm.nombre AS tipoMovimiento, Serie FROM movimientosEquipos AS me
+INNER JOIN tiposMovimientos AS tm ON me.idTipoMovimiento = tm.id 
+INNER JOIN usuarios AS u ON me.idUsuario = u.id WHERE idEquipo = p_idEquipo;
