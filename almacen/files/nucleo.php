@@ -63,7 +63,7 @@
                         break;
                 }
             
-                $stmt = $link->prepare("SELECT e.Serie, e.Marca, e.Modelo, te.NomEquipo AS Tipo, u.nomUsuario AS Asignacion, e.Economico FROM equipos AS e INNER JOIN tipoequipo AS te ON e.Tipo = te.IdTipo INNER JOIN usuarios AS u ON e.Asignacion = u.idUsuario WHERE Modelo LIKE ? OR u.nomUsuario LIKE ?");
+                $stmt = $link->prepare("SELECT e.id, e.Serie, e.Marca, e.Modelo, te.NomEquipo AS Tipo, u.nomUsuario AS Asignacion, e.Economico FROM equipos AS e INNER JOIN tipoequipo AS te ON e.Tipo = te.IdTipo INNER JOIN usuarios AS u ON e.Asignacion = u.idUsuario WHERE Modelo LIKE ? OR u.nomUsuario LIKE ?");
                 $stmt->bind_param("ss", $cadenaBusqueda, $cadenaBusqueda);
             
                 if($stmt->execute()) {
@@ -156,6 +156,9 @@
                     }
 
                     $idEquipo = $row['id'];
+
+                    $salida['res'] = $row;
+
                     $idTipoMovimiento = 1;
                     $idUsuario = $_SESSION['IdUsuario'];
 
@@ -205,7 +208,7 @@
                 $stmt->close();
                 break;
             case 'obtenerEquipos':
-                $stmt = $link->prepare("SELECT e.Serie, e.Marca, e.Modelo, te.NomEquipo AS Tipo, u.nomUsuario AS Asignacion, e.Economico FROM equipos AS e INNER JOIN tipoequipo AS te ON e.Tipo = te.IdTipo INNER JOIN usuarios AS u ON e.Asignacion = u.idUsuario");
+                $stmt = $link->prepare("SELECT e.id, e.Serie, e.Marca, e.Modelo, te.NomEquipo AS Tipo, u.nomUsuario AS Asignacion, e.Economico FROM equipos AS e INNER JOIN tipoequipo AS te ON e.Tipo = te.IdTipo INNER JOIN usuarios AS u ON e.Asignacion = u.idUsuario");
             
                 if($stmt->execute()) {
                     $rows = mysqli_fetch_all($stmt->get_result(), MYSQLI_ASSOC);

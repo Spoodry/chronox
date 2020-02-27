@@ -8,7 +8,7 @@ function obtenerTiposEquipo() {
             if(data.err == 0) {
                 var opciones = '<option value="-1"></option>';
                 $.each(data.res, function(index, array) {
-                    opciones += '<option value="' + array['IdTipo'] + '">' + array['NomEquipo'] + '</option>'
+                    opciones += '<option value="' + array['IdTipo'] + '">' + array['NomEquipo'] + '</option>';
                 });
 
                 $("#slTipoEquipo").html(opciones);

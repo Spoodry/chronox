@@ -15,9 +15,29 @@ $("#formAltaEquipo").on('submit', function(e){
         success: function(data) {
             console.log(data);
             if(data.err == 0) {
-                alert('Se ha dado de alta el equipo');
+                Swal.fire("Aviso", "Equipo dado de alta exitosamente", "success").then((result) => {
+                    if(result.value) {
+                        Swal.fire({
+                            title: "Aviso", 
+                            text: "¿Desea ver el reporte de alta del equipo?",
+                            type: "info",
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Sí',
+                            cancelButtonText: 'No'
+                        }).then((resultNot) => {
+                            if(resultNot.value) {
+                                var url = "entrada-inventario.php?idEquipo=" + data.res['id'];
+                                window.open(url, "_blank");
+                            }
+                            $("#formAltaEquipo").trigger('reset');
+                            $("#altaEquipoMod").modal("hide");
+                        });
+                    }
+                });
             } else {
-                alert('Error al dar de alta el equipo');
+                Swal.fire("Aviso", "El equipo no pudo ser dado de alta", "error");
             }
         }
     })
