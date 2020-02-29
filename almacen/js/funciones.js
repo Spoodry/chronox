@@ -18,7 +18,7 @@ function buscar() {
                 $("#tableContenido").empty();
                 $.each(data.res, function(index, array) {
                     var btnEditar = "<a href=\"pdf/historial.php?idEquipo=" + array['id'] + "\" class=\"btn btn-outline-warning mb-1 mr-1\" title=\"Historial\"><i class=\"fa fa-history fa-sm fa-fw\"></i></a>";
-                    var btnBaja = "<button class=\"btn btn-outline-danger mb-1 mr-1\" title=\"Baja\" onclick=\"\"><i class=\"fa fa-minus fa-sm fa-fw\"></i></button>";
+                    var btnBaja = "<button class=\"btn btn-outline-danger mb-1 mr-1\" title=\"Baja\" onclick=\"bajaEquipo(" + array['id'] + ")\"><i class=\"fa fa-minus fa-sm fa-fw\"></i></button>";
                     var botones = "<div style=\"text-align:center;\">" + btnEditar + btnBaja + "</div>";
 
                     informacion += "<tr><td>" + array['Serie'] + "</td>";

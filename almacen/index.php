@@ -101,11 +101,11 @@
                 <div class="modal-body">
                     <form method="POST" enctype="multipart/form-data" id="formAltaEquipo">
                         <label class="h6 font-weight-light">Serie</label>
-                        <input type = "text" class="form-control mb-2" name = "serie">
+                        <input type = "text" class="form-control mb-2" id="txtSerieAlta" name = "serie">
                         <label class="h6 font-weight-light">Marca</label>
-                        <input type = "text" class="form-control mb-2" name = "marca">
+                        <input type = "text" class="form-control mb-2" id="txtMarcaAlta" name = "marca">
                         <label class="h6 font-weight-light">Modelo</label>
-                        <input type = "text" class="form-control mb-2" name = "modelo">
+                        <input type = "text" class="form-control mb-2" id="txtModeloAlta" name="modelo">
                         <label class="h6 font-weight-light">Tipo</label>
                         <select name = "tipo" id="slTipoEquipo" class="form-control mb-2">
                         </select>
@@ -113,16 +113,19 @@
                         <select name="asignacion" id="slAsign" class="form-control mb-2">
                         </select>
                         <label class="h6 font-weight-light">Económico</label>
-                        <input type = "text" class="form-control mb-2" name = "economico">
+                        <input type = "text" class="form-control mb-2" id="txtEconoAlta" name = "economico">
                         <label class="h6 font-weight-light">Imagen</label>
-                        <input type="file" class="form-control-file mb-4" name="imagen">
-                        <div class="text-center">
-                            <input type="submit" class="btn btn-primary">
-                        </div>
+                        <input type="file" class="form-control-file mb-2" id="fileImagenAlta" name="imagen">
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-success" id="btnAltaEquipo">
+                        <span class="icon text-white-50">
+                            <i class="fa fa-paper-plane"></i>
+                        </span>
+                        <span class="text">Enviar</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -157,6 +160,10 @@
 
         $("#btnNuevoEquipo").click(function() {
             $("#altaEquipoMod").modal("toggle");
+        });
+
+        $("#btnAltaEquipo").click(function() {
+            altaEquipo();
         });
 
     </script>

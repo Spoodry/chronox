@@ -12,9 +12,6 @@
             <li class="nav-item" id="nvItemInform">
                 <a class="nav-link" href="buscarEquipos.php">Informe</a>
             </li>
-            <li class="nav-item" id="nvItemBajaEq">
-                <a class="nav-link" href="baja-equipo.php">Baja de Equipo</a>
-            </li>
         </ul>
         <div class="form-inline my-2 my-lg-0">
             <button class="btn btn-outline-danger my-2 my-sm-0" onclick="window.location='login.php';"><i class="fa fa-sign-out-alt"></i></button>
