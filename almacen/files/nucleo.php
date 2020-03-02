@@ -281,6 +281,24 @@
 
                 $stmt->close();
                 break;
+            case 'agregarAditamento':
+                $idAsignacion = $_GET['idAsignacion'];
+                $TipoAditamento = utf8_decode($_GET['TipoAditamento']);
+                $Tipo = utf8_decode($_GET['Tipo']);
+
+                $stmt = $link->prepare('CALL proc_agregarAditamento(?,?,?);');
+                $stmt->bind_param('iss', $idAsignacion, $TipoAditamento, $Tipo);
+
+                if(!$stmt->execute()) {
+                    $err = 1;
+                }
+
+                $salida['err'] = $err;
+
+                echo json_encode($salida);
+
+                $stmt->close();
+                break;
         }
     }
 

@@ -126,3 +126,59 @@ CREATE PROCEDURE proc_obtenerDatosEquipo(
 SELECT Serie, Marca, Modelo, te.NomEquipo AS Tipo, u.nomUsuario AS Asignacion, Economico, Imagen FROM equipos AS e
 INNER JOIN tipoequipo AS te ON e.Tipo = te.IdTipo
 LEFT JOIN usuarios AS u ON e.Asignacion = u.idUsuario WHERE e.id = p_idEquipo;
+
+UPDATE usuarios SET clave = (select MD5('Laptop123')), usuario = 'SrJovan' where id = 25;
+
+UPDATE usuarios SET nomUsuario = 'Juan Pablo Altamirano' WHERE id = 14;
+
+ALTER TABLE aditamentos
+    ADD id INT NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST;
+
+ALTER TABLE aditamentos
+    ADD idAditamento VARCHAR(5) NOT NULL AFTER id;
+
+ALTER TABLE aditamentos
+    ADD idAsignacion INT NOT NULL AFTER idAditamento;
+
+UPDATE aditamentos SET idAditamento = 'D0001', idAsignacion = 2 WHERE id = 1;
+UPDATE aditamentos SET idAditamento = 'D0002', idAsignacion = 2 WHERE id = 2;
+UPDATE aditamentos SET idAditamento = 'D0003', idAsignacion = 1 WHERE id = 3;
+UPDATE aditamentos SET idAditamento = 'D0004', idAsignacion = 1 WHERE id = 4;
+UPDATE aditamentos SET idAditamento = 'D0005', idAsignacion = 3 WHERE id = 5;
+UPDATE aditamentos SET idAditamento = 'D0006', idAsignacion = 3 WHERE id = 6;
+UPDATE aditamentos SET idAditamento = 'D0007', idAsignacion = 4 WHERE id = 7;
+UPDATE aditamentos SET idAditamento = 'D0008', idAsignacion = 4 WHERE id = 8;
+UPDATE aditamentos SET idAditamento = 'D0009', idAsignacion = 5 WHERE id = 9;
+UPDATE aditamentos SET idAditamento = 'D0010', idAsignacion = 5 WHERE id = 10;
+UPDATE aditamentos SET idAditamento = 'D0011', idAsignacion = 6 WHERE id = 11;
+UPDATE aditamentos SET idAditamento = 'D0012', idAsignacion = 6 WHERE id = 12;
+UPDATE aditamentos SET idAditamento = 'D0013', idAsignacion = 7 WHERE id = 13;
+UPDATE aditamentos SET idAditamento = 'D0014', idAsignacion = 7 WHERE id = 14;
+UPDATE aditamentos SET idAditamento = 'D0015', idAsignacion = 8 WHERE id = 15;
+UPDATE aditamentos SET idAditamento = 'D0016', idAsignacion = 8 WHERE id = 16;
+
+ALTER TABLE aditamentos
+    DROP COLUMN Marca;
+
+ALTER TABLE aditamentos
+    DROP COLUMN Modelo;
+
+ALTER TABLE aditamentos
+    DROP COLUMN Asignación;
+
+ALTER TABLE aditamentos
+    DROP COLUMN Economico;
+
+DELIMITER $$
+CREATE PROCEDURE proc_agregarAditamento(
+    p_idAsignacion INT,
+    p_TipoAditamento VARCHAR(6),
+    p_Tipo VARCHAR(30)
+)
+BEGIN
+    SET @idNuevo = (SELECT MAX(id) FROM aditamentos) + 1;
+    SET @idNuevo = IFNULL(@idNuevo,1);
+    SET @idAditamento = CONCAT('D', (SELECT LPAD(@idNuevo, 4, '0')));
+    INSERT INTO aditamentos(idAditamento, idAsignacion, TipoAditamento, Tipo) VALUES(@idAditamento, p_idAsignacion, p_TipoAditamento, p_Tipo);
+END $$
+DELIMITER ;

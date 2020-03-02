@@ -13,6 +13,7 @@
                 <a class="nav-link" href="buscarEquipos.php">Informe</a>
             </li>
         </ul>
+        <label class="text-primary font-weight-bold mt-2 mr-4"><?php echo $_SESSION['NomUsuario'];?></label>
         <div class="form-inline my-2 my-lg-0">
             <button class="btn btn-outline-danger my-2 my-sm-0" onclick="window.location='login.php';"><i class="fa fa-sign-out-alt"></i></button>
         </div>

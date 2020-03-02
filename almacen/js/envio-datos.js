@@ -97,7 +97,7 @@ function bajaEquipo(idEquipo) {
                 url: 'files/nucleo.php',
                 success: function(data) {
                     if(data.err == 0)
-                        Swal.fire("Aviso", "Equipo dado de alta exitosamente", "success");
+                        Swal.fire("Aviso", "Equipo dado de baja exitosamente", "success");
                     else
                         Swal.fire("Aviso", "El equipo no pudo ser dado de baja", "error");
                 }
