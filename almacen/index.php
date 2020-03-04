@@ -131,6 +131,33 @@
         </div>
     </div>
 
+    <div class="modal fade" id="agrAditMod" tabindex="-1" role="dialog" aria-labelledby="agregarAditamentoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="agregarAditamentoModalLabel">Agregar Aditamento</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label class="h6 font-weight-light">Tipo Aditamento</label>
+                    <select name="asignacion" id="slAsign" class="form-control mb-2">
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-success" id="btnAltaEquipo">
+                        <span class="icon text-white-50">
+                            <i class="fa fa-paper-plane"></i>
+                        </span>
+                        <span class="text">Enviar</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- jQuery (Necessary for All JavaScript Plugins) -->
     <script src="../js/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->

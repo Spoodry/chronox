@@ -161,11 +161,12 @@
 
                     $idTipoMovimiento = 1;
                     $idUsuario = $_SESSION['IdUsuario'];
+                    $idAditamento = 0;
 
                     $stmt->close();
 
-                    $stmt = $link->prepare('CALL proc_nuevoMovimientoEquipo(?,?,?,?);');
-                    $stmt->bind_param('iiis', $idUsuario, $idEquipo, $idTipoMovimiento, $query);
+                    $stmt = $link->prepare('CALL proc_nuevoMovimientoEquipo(?,?,?,?,?);');
+                    $stmt->bind_param('iiiis', $idUsuario, $idEquipo, $idAditamento, $idTipoMovimiento, $query);
 
                     $stmt->execute();
 
@@ -192,9 +193,10 @@
 
                     $idTipoMovimiento = 2;
                     $idUsuario = $_SESSION['IdUsuario'];
+                    $idAditamento = 0;
 
-                    $stmt = $link->prepare('CALL proc_nuevoMovimientoEquipo(?,?,?,?);');
-                    $stmt->bind_param('iiis', $idUsuario, $idEquipo, $idTipoMovimiento, $query);
+                    $stmt = $link->prepare('CALL proc_nuevoMovimientoEquipo(?,?,?,?,?);');
+                    $stmt->bind_param('iiiis', $idUsuario, $idEquipo, $idAditamento, $idTipoMovimiento, $query);
 
                     $stmt->execute();
                 } else {
@@ -287,9 +289,24 @@
                 $Tipo = utf8_decode($_GET['Tipo']);
 
                 $stmt = $link->prepare('CALL proc_agregarAditamento(?,?,?);');
+                $query = "CALL proc_agregarAditamento($idAsignacion,'$TipoAditamento','$Tipo');";
                 $stmt->bind_param('iss', $idAsignacion, $TipoAditamento, $Tipo);
 
-                if(!$stmt->execute()) {
+                if($stmt->execute()) {
+                    $row = mysqli_fetch_array($stmt->get_result(), MYSQLI_ASSOC);
+
+                    $idTipoMovimiento = 4;
+                    $idUsuario = $_SESSION['IdUsuario'];
+                    $idAditamento = $row['id'];
+
+                    $stmt->close();
+
+                    $stmt = $link->prepare('CALL proc_nuevoMovimientoEquipo(?,?,?,?,?);');
+                    $stmt->bind_param('iiiis', $idUsuario, $idAsignacion, $idAditamento, $idTipoMovimiento, $query);
+
+                    $stmt->execute();
+
+                } else {
                     $err = 1;
                 }
 

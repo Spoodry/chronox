@@ -100,13 +100,14 @@ DELIMITER $$
 CREATE PROCEDURE proc_nuevoMovimientoEquipo(
     p_idUsuario INT,
     p_idEquipo INT, 
+    p_idAditamento INT,
     p_idTipoMovimiento INT,
     p_query VARCHAR(512)
 )
 BEGIN
     SET @fecha = (SELECT NOW());
     SET @serie = (SELECT Serie FROM equipos WHERE id = p_idEquipo);
-    INSERT INTO movimientosEquipos(idUsuario, fecha, idEquipo, idTipoMovimiento, Serie, query) VALUES(p_idUsuario, @fecha, p_idEquipo, p_idTipoMovimiento, @serie, p_query);
+    INSERT INTO movimientosEquipos(idUsuario, fecha, idEquipo, idAditamento, idTipoMovimiento, Serie, query) VALUES(p_idUsuario, @fecha, p_idEquipo, p_idAditamento, p_idTipoMovimiento, @serie, p_query);
 END $$
 DELIMITER ;
 
@@ -180,5 +181,20 @@ BEGIN
     SET @idNuevo = IFNULL(@idNuevo,1);
     SET @idAditamento = CONCAT('D', (SELECT LPAD(@idNuevo, 4, '0')));
     INSERT INTO aditamentos(idAditamento, idAsignacion, TipoAditamento, Tipo) VALUES(@idAditamento, p_idAsignacion, p_TipoAditamento, p_Tipo);
+    SELECT id FROM aditamentos ORDER BY id DESC LIMIT 1;
 END $$
 DELIMITER ;
+
+ALTER TABLE movimientosEquipos
+    ADD idAditamento INT AFTER idEquipo;
+
+INSERT INTO tiposMovimientos(nombre) VALUES('alta-aditamento');
+
+UPDATE tiposMovimientos
+set nombre = 'alta-equipo' where id = 1;
+
+UPDATE tiposMovimientos
+set nombre = 'baja-equipo' where id = 2;
+
+UPDATE tiposMovimientos
+set nombre = 'actualizar-equipo' where id = 3;

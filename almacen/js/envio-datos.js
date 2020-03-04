@@ -105,3 +105,7 @@ function bajaEquipo(idEquipo) {
         }
     });
 }
+
+function nuevoAditamento(idEquipo) {
+    $("#agrAditMod").modal("toggle");
+}
