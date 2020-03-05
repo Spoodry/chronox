@@ -45,3 +45,27 @@ function obtenerUsuariosAsignacion() {
         }
     }); 
 }
+
+function obtenerTiposAditamentos() {
+    $.ajax({
+        data: $.param({'opc' : 'obtenerTiposAditamentos'}),
+        type: 'GET',
+        dataType: 'json',
+        url: 'files/nucleo.php',
+        success: function(data) {
+            if(data.err == 0) {
+                var opciones = '<option value="-1"></option>';
+                $.each(data.res, function(index, array) {
+                    opciones += '<option value="' + array['IdAditamento'] + '">' + array['Aditamento'] + '</option>'
+                });
+
+                $("#slTiposAdit").html(opciones);
+            } else {
+                alert('Usuarios no cargados');
+            }
+        },
+        error: function(data) {
+            alert('No hay conexión con el servidor')
+        }
+    }); 
+}

@@ -141,9 +141,11 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <label class="h6 font-weight-light">Tipo Aditamento</label>
-                    <select name="asignacion" id="slAsign" class="form-control mb-2">
+                    <label class="h6 font-weight-light">Tipo</label>
+                    <select name="asignacion" id="slTiposAdit" class="form-control mb-2">
                     </select>
+                    <label class="h6 font-weight-light">Descripción</label>
+                    <input type="text" class="form-control">
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
@@ -184,6 +186,7 @@
 
         obtenerTiposEquipo();
         obtenerUsuariosAsignacion();
+        obtenerTiposAditamentos();
 
         $("#btnNuevoEquipo").click(function() {
             $("#altaEquipoMod").modal("toggle");
