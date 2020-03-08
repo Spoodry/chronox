@@ -29,6 +29,8 @@ if($stmt->execute()) {
 
 		for($i = 0; $i < count($movimientos); $i++) {
 			$movimientos[$i]['nomUsuario'] = utf8_encode($movimientos[$i]['nomUsuario']);
+			$movimientos[$i]['Aditamento'] = utf8_encode($movimientos[$i]['Aditamento']);
+			$movimientos[$i]['descAditamento'] = utf8_encode($movimientos[$i]['descAditamento']);
 			$movimientos[$i]['tipoMovimiento'] = utf8_encode($movimientos[$i]['tipoMovimiento']);
 			$movimientos[$i]['Serie'] = utf8_encode($movimientos[$i]['Serie']);
 		}
@@ -85,9 +87,15 @@ $asignacion = $equipo['Asignacion'];
 $economico = $equipo['Economico'];
 $imagen = $equipo['Imagen'];
 
+$nomPDF = "HIST-$serie";
+$pdf->setTitle($nomPDF);
+
 $historial = "<ul>";
 for($i = 0; $i < count($movimientos); $i++) {
-	$historial .= "<li>";
+	$fecha = date("d-m-Y", strtotime($movimientos[$i]['fecha']));
+	$hora = date("g:i A", strtotime($movimientos[$i]['fecha']));
+
+	$historial .= "<li>$fecha $hora - ";
 	switch($movimientos[$i]['idTipoMovimiento']) {
 		case 1:		//alta
 			$historial .= "Se ha dado de alta ";
@@ -98,14 +106,20 @@ for($i = 0; $i < count($movimientos); $i++) {
 		case 3:		//actualización
 			$historial .= "Se ha actualizado ";
 			break;
+		case 4:		//alta aditamento
+			$historial .= "Se ha dado de alta el aditamento ";
+			break;
 	}
 
-	$fecha = date("d-m-Y", strtotime($movimientos[$i]['fecha']));
-	$hora = date("g:i A", strtotime($movimientos[$i]['fecha']));
-
 	$usuario = $movimientos[$i]['nomUsuario'];
+	$aditamento = $movimientos[$i]['Aditamento'];
+	$descAditamento = $movimientos[$i]['descAditamento'];
 
-	$historial .= "el equipo $marca $modelo con Serie $serie el dia $fecha a las $hora por el usuario $usuario.</li>";
+	if($movimientos[$i]['idTipoMovimiento'] == 4) {
+		$historial .= "$aditamento/$descAditamento por el usuario $usuario.</li>";
+	} else {
+		$historial .= "el equipo $marca $modelo con serie $serie por el usuario $usuario.</li>";	
+	}
 }
 $historial .= "</ul>";
 
@@ -147,5 +161,5 @@ $pdf->writeHTML($html, true, 0, true, 0);
 // ---------------------------------------------------------
 // Close and output PDF document
 // This method has several options, check the source code documentation for more information.
-$pdf->Output('example_001.pdf', 'FI');
+$pdf->Output($nomPDF . '.pdf', 'I');
 ?>

@@ -96,30 +96,8 @@ BEGIN
 END $$
 DELIMITER ;
 
-DELIMITER $$
-CREATE PROCEDURE proc_nuevoMovimientoEquipo(
-    p_idUsuario INT,
-    p_idEquipo INT, 
-    p_idAditamento INT,
-    p_idTipoMovimiento INT,
-    p_query VARCHAR(512)
-)
-BEGIN
-    SET @fecha = (SELECT NOW());
-    SET @serie = (SELECT Serie FROM equipos WHERE id = p_idEquipo);
-    INSERT INTO movimientosEquipos(idUsuario, fecha, idEquipo, idAditamento, idTipoMovimiento, Serie, query) VALUES(p_idUsuario, @fecha, p_idEquipo, p_idAditamento, p_idTipoMovimiento, @serie, p_query);
-END $$
-DELIMITER ;
-
 ALTER TABLE movimientosEquipos
     ADD idUsuario INT NOT NULL AFTER id;
-
-CREATE PROCEDURE proc_obtenerHistorial(
-    p_idEquipo INT
-)
-SELECT me.id, me.idUsuario, u.nomUsuario, fecha, idEquipo, idTipoMovimiento, tm.nombre AS tipoMovimiento, Serie FROM movimientosEquipos AS me
-INNER JOIN tiposMovimientos AS tm ON me.idTipoMovimiento = tm.id 
-INNER JOIN usuarios AS u ON me.idUsuario = u.id WHERE idEquipo = p_idEquipo;
 
 CREATE PROCEDURE proc_obtenerDatosEquipo(
     p_idEquipo INT
@@ -198,3 +176,27 @@ set nombre = 'baja-equipo' where id = 2;
 
 UPDATE tiposMovimientos
 set nombre = 'actualizar-equipo' where id = 3;
+
+CREATE PROCEDURE proc_obtenerHistorial(
+    p_idEquipo INT
+)
+SELECT me.id, me.idUsuario, u.nomUsuario, fecha, idEquipo, ad.idAditamento, ad.TipoAditamento, ta.Aditamento, ad.Tipo AS descAditamento, idTipoMovimiento, tm.nombre AS tipoMovimiento, Serie FROM movimientosEquipos AS me
+INNER JOIN tiposMovimientos AS tm ON me.idTipoMovimiento = tm.id 
+INNER JOIN usuarios AS u ON me.idUsuario = u.id
+LEFT JOIN aditamentos AS ad ON me.idAditamento = ad.id 
+LEFT JOIN tipoaditamentos AS ta ON ad.TipoAditamento = ta.idAditamento WHERE idEquipo = p_idEquipo;
+
+DELIMITER $$
+CREATE PROCEDURE proc_nuevoMovimientoEquipo(
+    p_idUsuario INT,
+    p_idEquipo INT, 
+    p_idAditamento INT,
+    p_idTipoMovimiento INT,
+    p_query VARCHAR(512)
+)
+BEGIN
+    SET @fecha = (SELECT NOW());
+    SET @serie = (SELECT Serie FROM equipos WHERE id = p_idEquipo);
+    INSERT INTO movimientosEquipos(idUsuario, fecha, idEquipo, idAditamento, idTipoMovimiento, Serie, query) VALUES(p_idUsuario, @fecha, p_idEquipo, p_idAditamento, p_idTipoMovimiento, @serie, p_query);
+END $$
+DELIMITER ;

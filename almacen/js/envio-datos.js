@@ -108,4 +108,55 @@ function bajaEquipo(idEquipo) {
 
 function nuevoAditamento(idEquipo) {
     $("#agrAditMod").modal("toggle");
+
+    $("#btnAgregarAdit").unbind();
+    $("#btnAgregarAdit").click(function() {
+        agregarAditamento(idEquipo);
+    });
+}
+
+function agregarAditamento(idEquipo) {
+    var infoCompleta = true;
+
+    if($("#slTiposAdit").val() == -1) {
+        infoCompleta = false;
+    }
+    if($("#txtDescAdit").val() == "") {
+        infoCompleta = false;
+    }
+
+    if(infoCompleta) {
+        Swal.fire({
+            title: "Aviso", 
+            text: "¿Está seguro que quiere agregar un aditamento?",
+            type: "info",
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí',
+            cancelButtonText: 'No'
+        }).then((result) => {
+            if(result.value) {
+                $.ajax({
+                    data: $.param({'opc' : 'agregarAditamento'}) + "&" + $.param({'idAsignacion' : idEquipo}) + "&" + $("#formAgrAdit").serialize(),
+                    type: 'GET',
+                    dataType: 'json',
+                    url: 'files/nucleo.php',
+                    success: function(data) {
+                        if(data.err == 0)
+                            Swal.fire("Aviso", "Aditamento agregado exitosamente", "success").then((result) => {
+                                if(result.value) {
+                                    $("#formAgrAdit").trigger('reset');
+                                    $("#agrAditMod").modal('hide');
+                                }
+                            });
+                        else
+                            Swal.fire("Aviso", "El aditamento no pudo agregarse", "error");
+                    }
+                });     
+            }
+        });
+    } else {
+        Swal.fire("Aviso", "Datos incompletos", "warning");
+    }
 }

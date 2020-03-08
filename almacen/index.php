@@ -23,6 +23,8 @@
     <link rel="stylesheet" href="../css/core-style.css">
     <link rel="stylesheet" href="../style.css">
 
+    <link rel="stylesheet" href="js/datatables/dataTables.bootstrap4.min.css">
+
     <style>
         .table td {
             vertical-align: middle;
@@ -70,8 +72,8 @@
             </div>
         </div>
         
-        <div class="table-responsive" id="tablaCompleta">
-            <table class="table">
+        <div class="table-responsive mb-4">
+            <table class="table" id="tEquipos" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>Serie</th>
@@ -141,15 +143,17 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <label class="h6 font-weight-light">Tipo</label>
-                    <select name="asignacion" id="slTiposAdit" class="form-control mb-2">
-                    </select>
-                    <label class="h6 font-weight-light">Descripción</label>
-                    <input type="text" class="form-control">
+                    <form id="formAgrAdit">
+                        <label class="h6 font-weight-light">Tipo</label>
+                        <select name="TipoAditamento" id="slTiposAdit" class="form-control mb-2">
+                        </select>
+                        <label class="h6 font-weight-light">Descripción</label>
+                        <input type="text" class="form-control" name="Tipo" id="txtDescAdit">
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                    <button class="btn btn-success" id="btnAltaEquipo">
+                    <button class="btn btn-success" id="btnAgregarAdit">
                         <span class="icon text-white-50">
                             <i class="fa fa-paper-plane"></i>
                         </span>
@@ -174,6 +178,9 @@
 
     <script src="js/sweetalert2/sweetalert2.all.min.js"></script>
 
+    <script src="js/datatables/jquery.dataTables.min.js"></script>
+    <script src="js/datatables/dataTables.bootstrap4.min.js"></script>
+
     <script src="js/funciones.js"></script>
 
     <script src="js/recibir-datos.js"></script>
@@ -183,6 +190,11 @@
     <script>
         activar('nvItemInv');
         buscar();
+        $("#txtCadena").keypress(function(e) { 
+            if(e.which == 13) { 
+                buscar();
+            } 
+        });
 
         obtenerTiposEquipo();
         obtenerUsuariosAsignacion();
@@ -194,6 +206,10 @@
 
         $("#btnAltaEquipo").click(function() {
             altaEquipo();
+        });
+
+        $('#agrAditMod').on('hidden.bs.modal', function(e) {
+            $('#formAgrAdit').trigger('reset');
         });
 
     </script>

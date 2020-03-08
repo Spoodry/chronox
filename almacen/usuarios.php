@@ -9,14 +9,11 @@
 
     include 'files/conexion.php';
     $link = Conectar();
-
-    $stmt = $link->prepare("SELECT * FROM equipos");
+    $stmt = $link->prepare('SELECT * FROM usuarios');
 
     if($stmt->execute()) {
         $rows = mysqli_fetch_all($stmt->get_result(), MYSQLI_ASSOC);
     }
-
-    $stmt->close();
 
 ?>
 <!DOCTYPE html>
@@ -24,13 +21,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <title>Historial</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Informe | Almacen</title>
 
     <link rel="icon" href="../img/core-img/favicon.ico">
 
-    <!-- Core Style CSS -->
     <link rel="stylesheet" href="../css/core-style.css">
     <link rel="stylesheet" href="../style.css">
 </head>
@@ -38,28 +33,22 @@
     <?php
         include('topbar.php');
     ?>
+    <div class="container">
+        <h1 class="h2 font-weight-light mb-2">Usuarios</h1>
 
-<div class="container">
-        <form method="GET" id="formBajaEquipo">
-            <div class="form-group">
-                <label>Equipos</label>
-                <select class="form-control" name="idEquipo">
-                <?php
-                    echo "<option value='-1'></option>";
-                    for($i = 0; $i < count($rows); $i++) {
-                        $id = $rows[$i]['id'];
-                        $Serie = $rows[$i]['Serie'];   
-                        $Marca = $rows[$i]['Marca'];
-                        $Modelo = $rows[$i]['Modelo'];
-
-                        echo "<option value='$id'>$Serie $Marca $Modelo</option>";
-                    }
-                ?>
-                </select>
-            </div>
-        </form>
-        <div class="text-center">
-            <input type="submit" class="btn btn-primary" value="Aceptar" onclick="">
+        <div class="table-responsive mb-4">
+            <table class="table" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Usuario</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
         </div>
     </div>
 
@@ -78,7 +67,8 @@
     <script src="js/funciones.js"></script>
 
     <script>
-        activar('nvItemHistorial');
+        activar('nvItemInform');
     </script>
+
 </body>
 </html>

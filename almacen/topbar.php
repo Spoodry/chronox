@@ -7,10 +7,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item" id="nvItemInv">
-                <a class="nav-link" href="index.php">Inventario<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="index.php">Inventario</a>
             </li>
             <li class="nav-item" id="nvItemInform">
-                <a class="nav-link" href="buscarEquipos.php">Informe</a>
+                <a class="nav-link" href="usuarios.php">Usuarios</a>
             </li>
         </ul>
         <label class="text-primary font-weight-bold mt-2 mr-4"><?php echo $_SESSION['NomUsuario'];?></label>
