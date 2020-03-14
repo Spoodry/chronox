@@ -6,15 +6,6 @@
     if(!isset($_SESSION['IdUsuario']) || $_SESSION['IdUsuario'] == -1) {
         header('location: login.php');
     }
-
-    include 'files/conexion.php';
-    $link = Conectar();
-    $stmt = $link->prepare('SELECT * FROM usuarios');
-
-    if($stmt->execute()) {
-        $rows = mysqli_fetch_all($stmt->get_result(), MYSQLI_ASSOC);
-    }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -200,3 +200,24 @@ BEGIN
     INSERT INTO movimientosEquipos(idUsuario, fecha, idEquipo, idAditamento, idTipoMovimiento, Serie, query) VALUES(p_idUsuario, @fecha, p_idEquipo, p_idAditamento, p_idTipoMovimiento, @serie, p_query);
 END $$
 DELIMITER ;
+
+CREATE TABLE tiposUsuarios(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    descripcion VARCHAR(64) NOT NULL
+);
+
+INSERT INTO tiposUsuarios(descripcion) VALUES('Super Admin');
+INSERT INTO tiposUsuarios(descripcion) VALUES('Admin Inventario');
+INSERT INTO tiposUsuarios(descripcion) VALUES('Operador');
+INSERT INTO tiposUsuarios(descripcion) VALUES('Personal');
+
+ALTER TABLE usuarios
+    ADD idTipoUsuario INT NOT NULL AFTER idUsuario;
+
+UPDATE usuarios SET idTipoUsuario = 4;
+
+UPDATE usuarios SET idTipoUsuario = 1 WHERE id = 14;
+UPDATE usuarios SET idTipoUsuario = 2 WHERE id = 15;
+UPDATE usuarios SET idTipoUsuario = 3 WHERE id = 25;
+UPDATE usuarios SET idTipoUsuario = 3 WHERE id = 30;
+
