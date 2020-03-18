@@ -1,5 +1,5 @@
 <?php
-include '../files/conexion.php';
+include '../../files/conexion.php';
 
 $link = Conectar();
 
@@ -47,7 +47,7 @@ if($stmt->execute()) {
 
 $stmt->close();
 
-include('tcpdf.php');
+include('../tcpdf.php');
 
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 

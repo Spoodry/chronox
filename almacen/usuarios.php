@@ -17,27 +17,40 @@
 
     <link rel="icon" href="../img/core-img/favicon.ico">
 
-    <link rel="stylesheet" href="../css/core-style.css">
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="js/datatables/dataTables.bootstrap4.min.css">
+    
+    <style>
+        .table td {
+            vertical-align: middle;
+        }
+    </style>
 </head>
 <body>
     <?php
         include('topbar.php');
     ?>
     <div class="container">
-        <h1 class="h2 font-weight-light mb-2">Usuarios</h1>
+        <h1 class="h2 font-weight-light mb-4">Usuarios</h1>
 
         <div class="table-responsive mb-4">
-            <table class="table" width="100%" cellspacing="0">
+            <table class="table" id="tUsuarios" width="100%" cellspacing="0">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
                         <th>Usuario</th>
-                        <th>Acciones</th>
+                        <th>Tipo de Usuario</th>
+                        <th style="text-align: center;">Acciones</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tbodyUsuarios">
+                    <td colspan="5" class="text-center">
+                        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </td>
                 </tbody>
             </table>
         </div>
@@ -55,10 +68,18 @@
     <script src="../js/classy-nav.min.js"></script>
     <script src="https://kit.fontawesome.com/34336e5f41.js" crossorigin="anonymous"></script>
 
+    <script src="js/sweetalert2/sweetalert2.all.min.js"></script>
+
+    <script src="js/datatables/jquery.dataTables.min.js"></script>
+    <script src="js/datatables/dataTables.bootstrap4.min.js"></script>
+
     <script src="js/funciones.js"></script>
+    <script src="js/recibir-datos.js"></script>
 
     <script>
         activar('nvItemInform');
+        
+        obtenerUsuarios();
     </script>
 
 </body>

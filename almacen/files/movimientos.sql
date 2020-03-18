@@ -221,3 +221,5 @@ UPDATE usuarios SET idTipoUsuario = 2 WHERE id = 15;
 UPDATE usuarios SET idTipoUsuario = 3 WHERE id = 25;
 UPDATE usuarios SET idTipoUsuario = 3 WHERE id = 30;
 
+SELECT u.id, idUsuario, idTipoUsuario, tu.descripcion AS tipoUsuario, nomUsuario, usuario FROM usuarios AS u INNER JOIN tiposUsuarios AS tu ON u.idTipoUsuario = tu.id;
+
