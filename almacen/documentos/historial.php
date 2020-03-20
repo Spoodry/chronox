@@ -1,5 +1,5 @@
 <?php
-include '../../files/conexion.php';
+include '../files/conexion.php';
 
 $link = Conectar();
 
@@ -47,12 +47,11 @@ if($stmt->execute()) {
 
 $stmt->close();
 
-include('../tcpdf.php');
+include('../pdf/tcpdf.php');
 
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
 // set default header data
-//$pdf->SetHeaderData('../img/logo.png', 45, 'Cotizaciones ', 'by servicio.a.clientes@solalsa.com');
 
 // set header and footer fonts
 $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
