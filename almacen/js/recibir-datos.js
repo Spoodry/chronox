@@ -89,8 +89,7 @@ function obtenerUsuarios() {
                 $.each(data.res, function(index, array) {
 
                     var btnXML = '<a href="XML.php?idUsuario=' + array['idUsuario'] + '" class="btn btn-outline-success mb-1 mr-1" title="XML"><i class="fa fa-file-code fa-sm fa-fw"></i></a>';
-                    var btnCSV = '<a href="pdf/historial.php?idEquipo=' + array['id'] + '" class="btn btn-outline-info mb-1 mr-1" title="CSV"><i class="fa fa-file-csv fa-sm fa-fw"></i></a>';
-                    var btns = '<div style="text-align:center;">' + btnXML + btnCSV + '</div>';
+                    var btns = '<div style="text-align:center;">' + btnXML + '</div>';
                     table.row.add([
                         array['idUsuario'],
                         array['nomUsuario'],

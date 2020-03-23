@@ -12,6 +12,9 @@
             <li class="nav-item" id="nvItemInform">
                 <a class="nav-link" href="usuarios.php">Usuarios</a>
             </li>
+            <li class="nav-item" id="nvItemDatos">
+                <a class="nav-link" href="datos.php">Datos</a>
+            </li>
         </ul>
         <label class="text-primary font-weight-bold mt-2 mr-4"><?php echo $_SESSION['NomUsuario'];?></label>
         <div class="form-inline my-2 my-lg-0">
