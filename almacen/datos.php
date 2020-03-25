@@ -38,7 +38,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <button class="btn btn-primary">
+                <button class="btn btn-primary" id="btnEquipos">
                     <span class="icon text-white-50">
                         <i class="fa fa-download"></i>
                     </span>
@@ -46,7 +46,7 @@
                 </button>
             </div>
             <div class="col">
-                <button class="btn btn-info">
+                <button class="btn btn-info" id="btnAditamentos">
                     <span class="icon text-white-50">
                         <i class="fa fa-download"></i>
                     </span>
@@ -54,7 +54,7 @@
                 </button>
             </div>
             <div class="col">
-                <button class="btn btn-danger">
+                <button class="btn btn-danger" id="btnUsuarios">
                     <span class="icon text-white-50">
                         <i class="fa fa-download"></i>
                     </span>
@@ -62,7 +62,7 @@
                 </button>
             </div>
             <div class="col">
-                <button class="btn btn-warning">
+                <button class="btn btn-warning" id="btnMovEquipos">
                     <span class="icon text-black-50">
                         <i class="fa fa-download"></i>
                     </span>
@@ -97,6 +97,30 @@
 
     <script>
         activar('nvItemDatos');
+
+        $("#btnMovEquipos").click(function() {
+            var url = "CSV.php?tabla=3";
+
+            window.open(url, "_blank");
+        });
+
+        $("#btnUsuarios").click(function() {
+            var url = "CSV.php?tabla=2";
+
+            window.open(url, "_blank");
+        });
+
+        $("#btnAditamentos").click(function() {
+            var url = "CSV.php?tabla=1";
+
+            window.open(url, "_blank");
+        });
+
+        $("#btnEquipos").click(function() {
+            var url = "CSV.php?tabla=0";
+
+            window.open(url, "_blank");
+        });
     </script>
 
 </body>
