@@ -223,3 +223,10 @@ UPDATE usuarios SET idTipoUsuario = 3 WHERE id = 30;
 
 SELECT u.id, idUsuario, idTipoUsuario, tu.descripcion AS tipoUsuario, nomUsuario, usuario FROM usuarios AS u INNER JOIN tiposUsuarios AS tu ON u.idTipoUsuario = tu.id;
 
+ALTER TABLE usuarios
+    ADD correo VARCHAR(64) NOT NULL AFTER nomUsuario;
+
+UPDATE usuarios SET correo = 'jan080599xd@gmail.com' WHERE id = 14;
+UPDATE usuarios SET correo = 'edsonwtfnniga@gmail.com' WHERE id = 15;
+UPDATE usuarios SET correo = 'jovankipp99@gmail.com' WHERE id = 25;
+

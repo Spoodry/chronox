@@ -89,12 +89,17 @@ function obtenerUsuarios() {
                 $.each(data.res, function(index, array) {
 
                     var btnXML = '<a href="XML.php?idUsuario=' + array['idUsuario'] + '" class="btn btn-outline-success mb-1 mr-1" title="XML"><i class="fa fa-file-code fa-sm fa-fw"></i></a>';
-                    var btns = '<div style="text-align:center;">' + btnXML + '</div>';
+                    var btnCorreo = '<button class="btn btn-outline-primary mb-1 mr-1" title="Enviar correo"><i class="fa fa-envelope fa-sm fa-fw"></i></button>';
+                    var botonesPermitidos = btnXML;
+                    if(array['correo'] != '')
+                        botonesPermitidos += btnCorreo;
+                    var btns = '<div style="text-align:center;">' + botonesPermitidos + '</div>';
                     table.row.add([
                         array['idUsuario'],
                         array['nomUsuario'],
                         array['usuario'],
                         array['tipoUsuario'],
+                        array['correo'],
                         btns
                     ]).draw(true);
                 });

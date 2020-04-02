@@ -340,7 +340,7 @@
                 $stmt->close();
                 break;
             case 'obtenerUsuarios':
-                $stmt = $link->prepare('SELECT u.id, idUsuario, idTipoUsuario, tu.descripcion AS tipoUsuario, nomUsuario, usuario FROM usuarios AS u INNER JOIN tiposUsuarios AS tu ON u.idTipoUsuario = tu.id;');
+                $stmt = $link->prepare('SELECT u.id, idUsuario, idTipoUsuario, tu.descripcion AS tipoUsuario, correo, nomUsuario, usuario FROM usuarios AS u INNER JOIN tiposUsuarios AS tu ON u.idTipoUsuario = tu.id;');
 
                 if($stmt->execute()) {
                     $rows = mysqli_fetch_all($stmt->get_result(), MYSQLI_ASSOC);
@@ -361,6 +361,15 @@
                 echo json_encode($salida);
 
                 $stmt->close();
+                break;
+            case 'enviarCorreoAsignaciones':
+                $idUsuario = $_GET['idUsuario'];
+
+                $stmt = $link->prepare('SELECT u.id, idUsuario, idTipoUsuario, tu.descripcion AS tipoUsuario, correo, nomUsuario, usuario FROM usuarios AS u INNER JOIN tiposUsuarios AS tu ON u.idTipoUsuario = tu.id WHERE u.id = ?;');
+                $stmt->bind_param('i', $idUsuario);
+
+                
+
                 break;
         }
     }

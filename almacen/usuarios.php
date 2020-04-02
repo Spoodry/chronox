@@ -42,11 +42,12 @@
                         <th>Nombre</th>
                         <th>Usuario</th>
                         <th>Tipo de Usuario</th>
+                        <th>Correo</th>
                         <th style="text-align: center;">Acciones</th>
                     </tr>
                 </thead>
                 <tbody id="tbodyUsuarios">
-                    <td colspan="5" class="text-center">
+                    <td colspan="6" class="text-center">
                         <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
                             <span class="sr-only">Loading...</span>
                         </div>
