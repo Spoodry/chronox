@@ -53,7 +53,7 @@ $html = <<<EOD
   <container class="header">
     <row class="collapse">
       <columns>
-        <img src="https://ubicacenter.com/autem/img/autem.jpeg" alt="" width="150px" height="60px">
+        <img src="https://chronox.me/img/core-img/logo.png" alt="" width="100px" height="25px">
       </columns>
     </row>
   </container>
@@ -66,7 +66,7 @@ $html = <<<EOD
   
     <row>
       <columns>
-        <h3 class="text-center">Hoja de Servicio</h3>
+        <h3 class="text-center">Listado de equipos</h3>
         <p class="text-right">$fechaAhora | $horaAhora</p>
       </columns>
     </row>
@@ -75,24 +75,8 @@ $html = <<<EOD
   
     <row>
       <columns>
-        <p class="text-center">$mensaje.</p>
-        <ul>
-          <li><strong>Folio: </strong>$folio</li>
-          <li><strong>Fecha de cita: </strong>$fechaCita</li>
-          <li><strong>Descripción: </strong>$descripcion</li><br />
-          <li><strong>Distribuidor: </strong>$distribuidor</li>
-          <li><strong>Cliente: </strong>$cliente</li>
-          <li><strong>Categoría: </strong>$categoria / $tipoServicio</li>
-          <li><strong>Técnico: </strong>$tecnico</li>
-          <li><strong>Unidad: </strong>$tipoUnidad / $numEconoAlias</li>
-          <li><strong>Estatus: </strong>$estatus</li>
-        </ul>
-        <center>
-          <form action="https://ubicacenter.com/autem/servicios.php">
-            <input type="hidden" name="vistaPrevia" value="$folio">
-            <input type="submit" class="btn" value="Ver Servicio">
-          </form>
-        </center>
+        <p class="text-center">$mensaje</p>
+        <p class="text-center">$listaAsignaciones</p>
       </columns>
     </row>
   

@@ -6,10 +6,12 @@ require 'PHPMailer/PHPMailer.php';
 require 'PHPMailer/SMTP.php';
 
 $html = "";
+$fechaAhora = date("d/m/Y");
+$horaAhora = date("g:i A");
 switch($tipoCorreo) {
-    case '':
-        $mensaje = "Hola, te hemos enviado la hoja de servicio correspondiente al servicio con folio #$folio";
-        include("plantilla-hoja-servicio.php");
+    case 'asignacionesUsuario':
+        $mensaje = "Hola, $nombre te hemos enviado el listado de los equipos que tienes asignados.";
+        include("plantilla-listado.php");
         break;
 }
 /* CONFIGURACIÓN DEL SERVIDOR DE CORREO*/
@@ -43,7 +45,7 @@ try {
     //Recipients
     $mail->setFrom($srv_username, $srv_nombre);
     switch($tipoCorreo) {
-        case 'estatusAutorizado':
+        case 'asignacionesUsuario':
             $mail->addAddress($correo, '');
             break;
         default:
@@ -56,28 +58,12 @@ try {
     $mail->isHTML(true);                                  // Set email format to HTML
     $mail->Subject = $asunto;
     $mail->Body    = $html;
-    switch($tipoCorreo) {
-        case 'hojaServicio':
-            $mail->AddAttachment('../temp/'.$archivo, $name = $archivo,  $encoding = 'base64', $type = 'application/pdf');
-            break;
-    }
     $mail->send();
     $res = 'El mensaje ha sido Enviado';
-    switch($tipoCorreo) {
-        case 'hojaServicio':
-            unlink('../temp/' . $archivo);
-            break;
-    }
 
 } catch (Exception $e) {
     $err = 1;
     $res = 'Error al enviar el mensaje. Error: ' . $mail->ErrorInfo;
-
-    switch($tipoCorreo) {
-        case 'hojaServicio':
-            unlink('../temp/' . $archivo);
-            break;
-    }
 }
 
 ?>

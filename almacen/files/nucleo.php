@@ -363,13 +363,67 @@
                 $stmt->close();
                 break;
             case 'enviarCorreoAsignaciones':
-                $idUsuario = $_GET['idUsuario'];
+                $idUsuario = utf8_decode($_GET['idUsuario']);
+                $tipoCorreo = 'asignacionesUsuario';
+                $asunto = 'Listado de asignaciones';
 
-                $stmt = $link->prepare('SELECT u.id, idUsuario, idTipoUsuario, tu.descripcion AS tipoUsuario, correo, nomUsuario, usuario FROM usuarios AS u INNER JOIN tiposUsuarios AS tu ON u.idTipoUsuario = tu.id WHERE u.id = ?;');
-                $stmt->bind_param('i', $idUsuario);
+                $stmt = $link->prepare('SELECT u.id, idUsuario, idTipoUsuario, tu.descripcion AS tipoUsuario, correo, nomUsuario, usuario FROM usuarios AS u INNER JOIN tiposUsuarios AS tu ON u.idTipoUsuario = tu.id WHERE u.idUsuario = ?;');
+                $stmt->bind_param('s', $idUsuario);
 
-                
+                $listaAsignaciones = '';
+                if($stmt->execute()) {
+                    $rowUsuario = mysqli_fetch_array($stmt->get_result(), MYSQLI_ASSOC);
+                    $rowUsuario = array_map("utf8_encode", $rowUsuario);
+                    $nombre = $rowUsuario['nomUsuario'];
+                    $correo = $rowUsuario['correo'];
+                    
+                    $stmt = $link->prepare('SELECT id, Serie, Marca, Modelo, Tipo, te.NomEquipo AS tipoEquipo, Asignacion, Economico, estatus FROM equipos AS e INNER JOIN tipoequipo AS te ON e.Tipo = te.IdTipo WHERE estatus = 1 AND Asignacion = ?;');
+                    $stmt->bind_param('s', $idUsuario);
 
+                    if($stmt->execute()) {
+                        $rowsEquipos = mysqli_fetch_all($stmt->get_result(), MYSQLI_ASSOC);                
+        
+                        $stmt->close();
+                        $listaAsignaciones .= '<ol>';
+                        for($i = 0; $i < count($rowsEquipos); $i++) {
+                            $rowsEquipos[$i] = array_map("utf8_encode", $rowsEquipos[$i]);
+                            $listaAsignaciones .= '<li>Equipo: ';
+                            $listaAsignaciones .= $rowsEquipos[$i]['Marca'] . ' ' . $rowsEquipos[$i]['Modelo'];
+
+                            $stmt = $link->prepare('SELECT id, a.idAditamento, TipoAditamento, ta.Aditamento AS nomTipoAditamento, Tipo FROM aditamentos AS a INNER JOIN tipoaditamentos AS ta ON a.TipoAditamento = ta.IdAditamento WHERE idAsignacion = ?;');
+                            $stmt->bind_param('i', $rowsEquipos[$i]['id']);
+        
+                            if($stmt->execute()) {
+                                $rowsAditamentos = mysqli_fetch_all($stmt->get_result(), MYSQLI_ASSOC);
+                                
+                                if(count($rowsAditamentos) != 0) {
+                                    $listaAsignaciones .= '<ul>';
+                                    for($k = 0; $k < count($rowsAditamentos); $k++) {
+                                        $rowsAditamentos[$k] = array_map("utf8_encode", $rowsAditamentos[$k]);
+                                        $listaAsignaciones .= '<li>Aditamento: ';
+                                        $listaAsignaciones .= $rowsAditamentos[$k]['nomTipoAditamento'] . ' ' . $rowsAditamentos[$k]['Tipo'];
+                                        $listaAsignaciones .= '</li>';
+                                    }
+                                    $listaAsignaciones .= '</ul>';
+                                }
+                                $listaAsignaciones .= '</li>';
+                            }
+        
+                            $stmt->close();
+        
+                        }
+
+                        $listaAsignaciones .= '<ol>';
+                        
+                        if(count($rowsEquipos) == 0)
+                            $listaAsignaciones = 'No tienes equipos asignados';
+
+                    }    
+                }
+                include('../PHPMailer/enviar-correo.php');
+
+                $salida['err'] = $err;
+                echo json_encode($salida);
                 break;
         }
     }

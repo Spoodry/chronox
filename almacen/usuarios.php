@@ -76,6 +76,7 @@
 
     <script src="js/funciones.js"></script>
     <script src="js/recibir-datos.js"></script>
+    <script src="js/envio-datos.js"></script>
 
     <script>
         activar('nvItemInform');

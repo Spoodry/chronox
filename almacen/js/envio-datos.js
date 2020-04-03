@@ -160,3 +160,31 @@ function agregarAditamento(idEquipo) {
         Swal.fire("Aviso", "Datos incompletos", "warning");
     }
 }
+
+function enviarAsignaciones(idUsuario) {
+    Swal.fire({
+        title: "Aviso", 
+        text: "¿Desea enviar por correo las asignaciones de este usuario?",
+        type: "info",
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí',
+        cancelButtonText: 'No'
+    }).then((result) => {
+        if(result.value) {
+            $.ajax({
+                data: $.param({'opc' : 'enviarCorreoAsignaciones'}) + "&" + $.param({'idUsuario' : idUsuario}),
+                type: 'GET',
+                dataType: 'json',
+                url: 'files/nucleo.php',
+                success: function(data) {
+                    if(data.err == 0)
+                        Swal.fire("Aviso", "Correo enviado exitosamente", "success");
+                    else
+                        Swal.fire("Aviso", "No se pudo enviar el correo", "error");
+                }
+            });     
+        }
+    });
+}
