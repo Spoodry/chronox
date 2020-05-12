@@ -20,7 +20,7 @@
             break;
         case 1:
             $nomArchivo = "aditamentos_";
-            $query = "SELECT a.id, a.idAditamento, CONCAT_WS(' - ', u.idUsuario, u.nomUsuario) AS Asignacion, CONCAT_WS(' - ', TipoAditamento, ta.Aditamento) AS TipoAditamento, Tipo FROM aditamentos AS a INNER JOIN tipoaditamentos AS ta ON a.TipoAditamento = ta.IdAditamento INNER JOIN usuarios AS u ON a.idAsignacion = u.id";
+            $query = "SELECT a.id, a.idAditamento, CONCAT_WS(' - ', u.idUsuario, u.nomUsuario) AS Asignacion, CONCAT_WS(' - ', TipoAditamento, ta.Aditamento) AS TipoAditamento, a.Tipo FROM aditamentos AS a INNER JOIN tipoaditamentos AS ta ON a.TipoAditamento = ta.IdAditamento INNER JOIN equipos AS e ON e.id = a.id INNER JOIN usuarios AS u ON e.Asignacion = u.idUsuario ORDER BY a.id";
             break;
         case 2:
             $nomArchivo = "usuarios_";
